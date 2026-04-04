@@ -64,6 +64,11 @@ function Router() {
           <AppLayout />
         </AuthGuard>
       </Route>
+      <Route path="/library">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );

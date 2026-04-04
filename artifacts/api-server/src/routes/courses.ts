@@ -41,4 +41,22 @@ router.get("/courses/:courseId", async (req, res) => {
   }
 });
 
+router.get("/library", async (req, res) => {
+  try {
+    const allNotes = await db.select().from(notesTable);
+    const allCourses = await db.select().from(coursesTable);
+    const courseMap = Object.fromEntries(allCourses.map(c => [c.id, c]));
+    const library = allNotes.map(note => ({
+      ...note,
+      courseName: courseMap[note.courseId]?.title || "Unknown Course",
+      courseCategory: courseMap[note.courseId]?.category || "General",
+      courseDifficulty: courseMap[note.courseId]?.difficulty || "beginner",
+    }));
+    return res.json(library);
+  } catch (err) {
+    req.log.error({ err }, "Get library error");
+    return res.status(500).json({ error: "Failed to get library" });
+  }
+});
+
 export default router;

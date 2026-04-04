@@ -9,6 +9,7 @@ import Courses from "./Courses";
 import CourseDetail from "./CourseDetail";
 import Progress from "./Progress";
 import Certificates from "./Certificates";
+import Library from "./Library";
 
 export default function AppLayout() {
   const [chatOpen, setChatOpen] = useState(false);
@@ -42,6 +43,7 @@ export default function AppLayout() {
             <Route path="/courses" component={Courses} />
             <Route path="/progress" component={Progress} />
             <Route path="/certificates" component={Certificates} />
+            <Route path="/library" component={Library} />
           </Switch>
         </main>
       </div>
