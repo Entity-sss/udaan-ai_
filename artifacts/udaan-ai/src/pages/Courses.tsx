@@ -61,7 +61,7 @@ export default function Courses() {
         Courses
       </h1>
       <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
-        Explore our tech courses curated for your growth
+        Turn your now into your next — explore courses built for your journey
       </p>
 
       <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "2rem" }}>

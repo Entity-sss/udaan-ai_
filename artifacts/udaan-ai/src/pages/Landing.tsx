@@ -85,15 +85,28 @@ export default function Landing() {
           </h1>
           <p
             style={{
-              fontSize: "clamp(1rem, 2.5vw, 1.25rem)",
-              color: "rgba(255,255,255,0.65)",
+              fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
+              fontWeight: 700,
+              fontFamily: "'Space Grotesk', sans-serif",
+              letterSpacing: "0.01em",
+              background: "linear-gradient(90deg, #c084fc 0%, #f59e0b 60%, #c084fc 100%)",
+              backgroundSize: "200% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "shimmer 4s linear infinite",
               maxWidth: "560px",
-              lineHeight: 1.6,
-              fontWeight: 400,
+              lineHeight: 1.5,
             }}
           >
-            Your personalized journey to tech mastery begins here. AI-powered roadmaps crafted for your growth.
+            Turn your now into your next.
           </p>
+          <style>{`
+            @keyframes shimmer {
+              0% { background-position: 0% center; }
+              100% { background-position: 200% center; }
+            }
+          `}</style>
         </div>
 
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", marginTop: "0.5rem" }}>

@@ -56,7 +56,7 @@ export default function Progress() {
         Progress Tracker
       </h1>
       <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
-        Track your learning journey across all courses
+        Turn your now into your next — every step forward counts
       </p>
 
       <div

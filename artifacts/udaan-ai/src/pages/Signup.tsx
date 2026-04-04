@@ -167,7 +167,7 @@ export default function Signup() {
               {mode === "register" ? "Join Udaan AI" : "Sign In with OTP"}
             </h2>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem" }}>
-              {mode === "register" ? "Start your tech learning journey" : "Enter your mobile to receive OTP"}
+              {mode === "register" ? "Turn your now into your next" : "Enter your mobile to receive OTP"}
             </p>
           </div>
 

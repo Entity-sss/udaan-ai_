@@ -118,7 +118,7 @@ export default function Roadmap() {
         Your Learning Roadmap
       </h1>
       <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
-        {roadmap.description || `Personalized path for your tech mastery`}
+        {roadmap.description || `Turn your now into your next — your personalized path to mastery`}
       </p>
 
       <div style={{ ...cardStyle, marginBottom: "2rem" }}>
