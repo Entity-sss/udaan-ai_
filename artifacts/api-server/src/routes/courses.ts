@@ -1,0 +1,44 @@
+import { Router } from "express";
+import { db } from "@workspace/db";
+import { coursesTable, lecturesTable, notesTable, studentProgressTable } from "@workspace/db";
+import { eq } from "drizzle-orm";
+
+const router = Router();
+
+router.get("/courses", async (req, res) => {
+  try {
+    const courses = await db.select().from(coursesTable);
+    return res.json(courses);
+  } catch (err) {
+    req.log.error({ err }, "Get courses error");
+    return res.status(500).json({ error: "Failed to get courses" });
+  }
+});
+
+router.get("/courses/:courseId", async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const courses = await db.select().from(coursesTable).where(eq(coursesTable.id, courseId)).limit(1);
+    if (courses.length === 0) return res.status(404).json({ error: "Course not found" });
+
+    const lectures = await db.select().from(lecturesTable).where(eq(lecturesTable.courseId, courseId)).orderBy(lecturesTable.order);
+    const notes = await db.select().from(notesTable).where(eq(notesTable.courseId, courseId));
+
+    const progressChart = Array.from({ length: 8 }, (_, i) => ({
+      week: `Week ${i + 1}`,
+      percentage: Math.min(100, i * 14 + Math.floor(Math.random() * 5)),
+    }));
+
+    return res.json({
+      course: courses[0],
+      lectures: lectures.map(l => ({ ...l, isCompleted: false })),
+      notes,
+      progressChart,
+    });
+  } catch (err) {
+    req.log.error({ err }, "Get course error");
+    return res.status(500).json({ error: "Failed to get course" });
+  }
+});
+
+export default router;

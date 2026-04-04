@@ -1,22 +1,36 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Udaan AI Student Growth Ecosystem API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication operations
+  - name: students
+    description: Student profile operations
+  - name: assessment
+    description: AI assessment operations
+  - name: roadmap
+    description: Learning roadmap operations
+  - name: courses
+    description: Course operations
+  - name: progress
+    description: Progress tracking operations
+  - name: certificates
+    description: Certificate operations
+  - name: chat
+    description: AI chat operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +38,341 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/register:
+    post:
+      operationId: registerStudent
+      tags: [auth]
+      summary: Register a new student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterStudentBody"
+      responses:
+        "201":
+          description: Student registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Validation error
+
+  /auth/login:
+    post:
+      operationId: loginStudent
+      tags: [auth]
+      summary: Login with mobile and OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginBody"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /auth/send-otp:
+    post:
+      operationId: sendOtp
+      tags: [auth]
+      summary: Send OTP to mobile number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendOtpBody"
+      responses:
+        "200":
+          description: OTP sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OtpResponse"
+
+  /auth/verify-otp:
+    post:
+      operationId: verifyOtp
+      tags: [auth]
+      summary: Verify OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyOtpBody"
+      responses:
+        "200":
+          description: OTP verified
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /students/{studentId}:
+    get:
+      operationId: getStudent
+      tags: [students]
+      summary: Get student profile
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Student profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Student"
+    patch:
+      operationId: updateStudent
+      tags: [students]
+      summary: Update student profile
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStudentBody"
+      responses:
+        "200":
+          description: Updated student
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Student"
+
+  /students/{studentId}/dashboard:
+    get:
+      operationId: getStudentDashboard
+      tags: [students]
+      summary: Get student dashboard summary
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+
+  /assessment/questions:
+    get:
+      operationId: getAssessmentQuestions
+      tags: [assessment]
+      summary: Get AI-generated assessment questions
+      responses:
+        "200":
+          description: List of questions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentQuestion"
+
+  /assessment/submit:
+    post:
+      operationId: submitAssessment
+      tags: [assessment]
+      summary: Submit assessment answers and generate roadmap
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitAssessmentBody"
+      responses:
+        "200":
+          description: Assessment result with generated roadmap
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentResult"
+
+  /roadmap/{studentId}:
+    get:
+      operationId: getRoadmap
+      tags: [roadmap]
+      summary: Get personalized learning roadmap
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Student roadmap
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Roadmap"
+
+  /courses:
+    get:
+      operationId: getCourses
+      tags: [courses]
+      summary: Get all available courses
+      responses:
+        "200":
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Course"
+
+  /courses/{courseId}:
+    get:
+      operationId: getCourse
+      tags: [courses]
+      summary: Get course details with lectures and notes
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseDetail"
+
+  /progress/{studentId}:
+    get:
+      operationId: getProgress
+      tags: [progress]
+      summary: Get student progress across all courses
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Progress data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgressData"
+
+  /progress/{studentId}/course/{courseId}:
+    patch:
+      operationId: updateCourseProgress
+      tags: [progress]
+      summary: Update progress for a specific course
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProgressBody"
+      responses:
+        "200":
+          description: Updated progress
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseProgress"
+
+  /certificates/{studentId}:
+    get:
+      operationId: getCertificates
+      tags: [certificates]
+      summary: Get all student certificates
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of certificates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Certificate"
+
+  /certificates/verify/{certCode}:
+    get:
+      operationId: verifyCertificate
+      tags: [certificates]
+      summary: Verify certificate authenticity
+      parameters:
+        - name: certCode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Certificate verification result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CertificateVerification"
+
+  /chat:
+    post:
+      operationId: sendChatMessage
+      tags: [chat]
+      summary: Send message to AI chatbot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatMessageBody"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +380,480 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    RegisterStudentBody:
+      type: object
+      properties:
+        name:
+          type: string
+        mobile:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required: [name, mobile, email]
+
+    LoginBody:
+      type: object
+      properties:
+        mobile:
+          type: string
+        otp:
+          type: string
+      required: [mobile, otp]
+
+    SendOtpBody:
+      type: object
+      properties:
+        mobile:
+          type: string
+      required: [mobile]
+
+    OtpResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required: [success, message]
+
+    VerifyOtpBody:
+      type: object
+      properties:
+        mobile:
+          type: string
+        otp:
+          type: string
+      required: [mobile, otp]
+
+    AuthResponse:
+      type: object
+      properties:
+        student:
+          $ref: "#/components/schemas/Student"
+        token:
+          type: string
+        isNewStudent:
+          type: boolean
+      required: [student, token, isNewStudent]
+
+    Student:
+      type: object
+      properties:
+        id:
+          type: string
+        studentId:
+          type: string
+        name:
+          type: string
+        mobile:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        branch:
+          type: string
+        semester:
+          type: integer
+        college:
+          type: string
+        joinedAt:
+          type: string
+        assessmentCompleted:
+          type: boolean
+        skillLevel:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        interests:
+          type: array
+          items:
+            type: string
+        totalPoints:
+          type: integer
+        streak:
+          type: integer
+      required: [id, studentId, name, mobile, assessmentCompleted]
+
+    UpdateStudentBody:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        branch:
+          type: string
+        semester:
+          type: integer
+        college:
+          type: string
+        avatar:
+          type: string
+
+    DashboardSummary:
+      type: object
+      properties:
+        student:
+          $ref: "#/components/schemas/Student"
+        coursesEnrolled:
+          type: integer
+        coursesCompleted:
+          type: integer
+        totalLecturesWatched:
+          type: integer
+        overallProgress:
+          type: number
+        streak:
+          type: integer
+        totalPoints:
+          type: integer
+        certificates:
+          type: integer
+        recentActivity:
+          type: array
+          items:
+            $ref: "#/components/schemas/ActivityItem"
+        weeklyProgressData:
+          type: array
+          items:
+            $ref: "#/components/schemas/WeeklyProgress"
+        skillDistribution:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillData"
+      required: [student, coursesEnrolled, coursesCompleted, overallProgress, streak, totalPoints, certificates]
+
+    ActivityItem:
+      type: object
+      properties:
+        type:
+          type: string
+        description:
+          type: string
+        timestamp:
+          type: string
+        points:
+          type: integer
+      required: [type, description, timestamp]
+
+    WeeklyProgress:
+      type: object
+      properties:
+        day:
+          type: string
+        hours:
+          type: number
+        lectures:
+          type: integer
+      required: [day, hours, lectures]
+
+    SkillData:
+      type: object
+      properties:
+        skill:
+          type: string
+        level:
+          type: integer
+        color:
+          type: string
+      required: [skill, level]
+
+    AssessmentQuestion:
+      type: object
+      properties:
+        id:
+          type: string
+        question:
+          type: string
+        type:
+          type: string
+          enum: [multiple_choice, rating, open_ended]
+        options:
+          type: array
+          items:
+            type: string
+        category:
+          type: string
+      required: [id, question, type, category]
+
+    SubmitAssessmentBody:
+      type: object
+      properties:
+        studentId:
+          type: string
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/AssessmentAnswer"
+      required: [studentId, answers]
+
+    AssessmentAnswer:
+      type: object
+      properties:
+        questionId:
+          type: string
+        answer:
+          type: string
+      required: [questionId, answer]
+
+    AssessmentResult:
+      type: object
+      properties:
+        skillLevel:
+          type: string
+        interests:
+          type: array
+          items:
+            type: string
+        roadmap:
+          $ref: "#/components/schemas/Roadmap"
+        summary:
+          type: string
+      required: [skillLevel, interests, roadmap, summary]
+
+    Roadmap:
+      type: object
+      properties:
+        id:
+          type: string
+        studentId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        phases:
+          type: array
+          items:
+            $ref: "#/components/schemas/RoadmapPhase"
+        estimatedDuration:
+          type: string
+        createdAt:
+          type: string
+      required: [id, studentId, title, phases]
+
+    RoadmapPhase:
+      type: object
+      properties:
+        phase:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Course"
+        status:
+          type: string
+          enum: [locked, active, completed]
+        completionPercentage:
+          type: number
+      required: [phase, title, courses, status]
+
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        duration:
+          type: string
+        totalLectures:
+          type: integer
+        thumbnail:
+          type: string
+        instructor:
+          type: string
+        rating:
+          type: number
+        tags:
+          type: array
+          items:
+            type: string
+      required: [id, title, description, category, difficulty, totalLectures]
+
+    CourseDetail:
+      type: object
+      properties:
+        course:
+          $ref: "#/components/schemas/Course"
+        lectures:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lecture"
+        notes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Note"
+        progressChart:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProgressPoint"
+      required: [course, lectures, notes]
+
+    Lecture:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        duration:
+          type: string
+        order:
+          type: integer
+        isCompleted:
+          type: boolean
+        videoUrl:
+          type: string
+      required: [id, title, duration, order, isCompleted]
+
+    Note:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        lectureId:
+          type: string
+        createdAt:
+          type: string
+      required: [id, title, content]
+
+    ProgressPoint:
+      type: object
+      properties:
+        week:
+          type: string
+        percentage:
+          type: number
+      required: [week, percentage]
+
+    ProgressData:
+      type: object
+      properties:
+        overallProgress:
+          type: number
+        courseProgress:
+          type: array
+          items:
+            $ref: "#/components/schemas/CourseProgress"
+        monthlyData:
+          type: array
+          items:
+            $ref: "#/components/schemas/MonthlyProgress"
+      required: [overallProgress, courseProgress]
+
+    CourseProgress:
+      type: object
+      properties:
+        courseId:
+          type: string
+        courseName:
+          type: string
+        progress:
+          type: number
+        completedLectures:
+          type: integer
+        totalLectures:
+          type: integer
+        lastAccessedAt:
+          type: string
+      required: [courseId, courseName, progress, completedLectures, totalLectures]
+
+    MonthlyProgress:
+      type: object
+      properties:
+        month:
+          type: string
+        hoursStudied:
+          type: number
+        lecturesCompleted:
+          type: integer
+      required: [month, hoursStudied, lecturesCompleted]
+
+    UpdateProgressBody:
+      type: object
+      properties:
+        lectureId:
+          type: string
+        completed:
+          type: boolean
+        progress:
+          type: number
+      required: [lectureId, completed]
+
+    Certificate:
+      type: object
+      properties:
+        id:
+          type: string
+        certCode:
+          type: string
+        studentName:
+          type: string
+        studentId:
+          type: string
+        courseName:
+          type: string
+        courseCategory:
+          type: string
+        issuedAt:
+          type: string
+        grade:
+          type: string
+        qrData:
+          type: string
+      required: [id, certCode, studentName, studentId, courseName, issuedAt, qrData]
+
+    CertificateVerification:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        certificate:
+          $ref: "#/components/schemas/Certificate"
+        message:
+          type: string
+      required: [valid, message]
+
+    ChatMessageBody:
+      type: object
+      properties:
+        studentId:
+          type: string
+        message:
+          type: string
+        context:
+          type: string
+      required: [studentId, message]
+
+    ChatResponse:
+      type: object
+      properties:
+        reply:
+          type: string
+        suggestions:
+          type: array
+          items:
+            type: string
+      required: [reply]

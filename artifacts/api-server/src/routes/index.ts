@@ -1,8 +1,24 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
+import authRouter from "./auth";
+import studentsRouter from "./students";
+import assessmentRouter from "./assessment";
+import roadmapRouter from "./roadmap";
+import coursesRouter from "./courses";
+import progressRouter from "./progress";
+import certificatesRouter from "./certificates";
+import chatRouter from "./chat";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(authRouter);
+router.use(studentsRouter);
+router.use(assessmentRouter);
+router.use(roadmapRouter);
+router.use(coursesRouter);
+router.use(progressRouter);
+router.use(certificatesRouter);
+router.use(chatRouter);
 
 export default router;
