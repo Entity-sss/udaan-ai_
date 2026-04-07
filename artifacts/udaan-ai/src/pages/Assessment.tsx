@@ -9,6 +9,7 @@ import {
 import { getStoredStudent, setStoredStudent } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import logoPath from "/logo.png";
+import { AIMentorChat } from "@/components/AIMentorChat";
 
 export default function Assessment() {
   const [, setLocation] = useLocation();
@@ -192,6 +193,13 @@ export default function Assessment() {
           </div>
         </div>
 
+        <div style={{ marginBottom: "0.75rem", background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: "10px", padding: "0.625rem 1rem", display: "flex", alignItems: "center", gap: "0.625rem" }}>
+          <span style={{ fontSize: "1rem" }}>🤖</span>
+          <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.8rem", margin: 0 }}>
+            Unsure about this question? Your <strong style={{ color: "#a78bfa" }}>AI Mentor</strong> is ready to help — tap the purple button below right.
+          </p>
+        </div>
+
         {currentQ && (
           <div
             style={{
@@ -300,6 +308,11 @@ export default function Assessment() {
           </div>
         )}
       </div>
+
+      <AIMentorChat
+        currentQuestion={currentQ?.question}
+        studentName={student?.name}
+      />
     </div>
   );
 }

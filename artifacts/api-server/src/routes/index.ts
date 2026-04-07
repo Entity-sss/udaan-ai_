@@ -8,6 +8,7 @@ import coursesRouter from "./courses";
 import progressRouter from "./progress";
 import certificatesRouter from "./certificates";
 import chatRouter from "./chat";
+import mentorRouter from "./mentor";
 
 const router: IRouter = Router();
 
@@ -20,5 +21,6 @@ router.use(coursesRouter);
 router.use(progressRouter);
 router.use(certificatesRouter);
 router.use(chatRouter);
+router.use(mentorRouter);
 
 export default router;
