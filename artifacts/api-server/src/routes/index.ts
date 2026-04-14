@@ -9,6 +9,10 @@ import progressRouter from "./progress";
 import certificatesRouter from "./certificates";
 import chatRouter from "./chat";
 import mentorRouter from "./mentor";
+import mockTestRouter from "./mock-test";
+import mockInterviewRouter from "./mock-interview";
+import resumeRouter from "./resume";
+import growthRouter from "./growth";
 
 const router: IRouter = Router();
 
@@ -22,5 +26,9 @@ router.use(progressRouter);
 router.use(certificatesRouter);
 router.use(chatRouter);
 router.use(mentorRouter);
+router.use(mockTestRouter);
+router.use(mockInterviewRouter);
+router.use(resumeRouter);
+router.use(growthRouter);
 
 export default router;

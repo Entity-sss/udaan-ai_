@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "wouter";
-import { getQuestions, type Question } from "@/data/mockTestQuestions";
 import { useToast } from "@/hooks/use-toast";
+import type { Question } from "@/data/mockTestQuestions";
 
 type Screen = "setup" | "test" | "results";
 
@@ -24,6 +24,7 @@ export default function MockTest() {
   const [selected, setSelected] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(0);
   const [showReview, setShowReview] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = useCallback((finalAnswers: Record<string, number>, qs: Question[]) => {
     setAnswers(finalAnswers);
@@ -48,17 +49,32 @@ export default function MockTest() {
     return () => clearInterval(timer);
   }, [screen]);
 
-  function startTest() {
-    const qs = getQuestions(category, difficulty, 10);
-    if (qs.length === 0) {
-      toast({ title: "No questions available for this combination. Try another.", variant: "destructive" });
-      return;
+  async function startTest() {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/mock-test/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category, difficulty }),
+      });
+      if (!res.ok) throw new Error("Failed to generate test");
+      const qs = await res.json();
+      
+      if (!qs || qs.length === 0) {
+        toast({ title: "No questions available. Try another.", variant: "destructive" });
+        return;
+      }
+      setQuestions(qs.slice(0, 10)); // enforce 10 questions
+      setCurrentIdx(0);
+      setAnswers({});
+      setSelected(null);
+      setScreen("test");
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Failed to generate AI test", variant: "destructive" });
+    } finally {
+      setIsLoading(false);
     }
-    setQuestions(qs);
-    setCurrentIdx(0);
-    setAnswers({});
-    setSelected(null);
-    setScreen("test");
   }
 
   function handleNext() {
@@ -204,9 +220,10 @@ export default function MockTest() {
         <button
           data-testid="button-start-test"
           onClick={startTest}
-          style={{ ...btnBase, width: "100%", padding: "1rem", background: "linear-gradient(135deg, #7c3aed, #9333ea)", color: "white", fontSize: "1rem", boxShadow: "0 0 20px rgba(124,58,237,0.35)" }}
+          disabled={isLoading}
+          style={{ ...btnBase, width: "100%", padding: "1rem", background: isLoading ? "rgba(124,58,237,0.3)" : "linear-gradient(135deg, #7c3aed, #9333ea)", color: "white", fontSize: "1rem", boxShadow: isLoading ? "none" : "0 0 20px rgba(124,58,237,0.35)", cursor: isLoading ? "wait" : "pointer" }}
         >
-          Start Test
+          {isLoading ? "Generating with AI..." : "Start Test"}
         </button>
       </div>
     </div>

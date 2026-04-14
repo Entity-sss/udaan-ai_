@@ -1,14 +1,10 @@
 import app from "./app";
 import { logger } from "./lib/logger";
+import { loadEnvOnce } from "./lib/load-env";
 
-const rawPort = process.env["PORT"];
+loadEnvOnce();
 
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
-
+const rawPort = process.env["PORT"] ?? "3001";
 const port = Number(rawPort);
 
 if (Number.isNaN(port) || port <= 0) {

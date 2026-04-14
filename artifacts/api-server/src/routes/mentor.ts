@@ -1,7 +1,20 @@
 import { Router } from "express";
-import { anthropic } from "@workspace/integrations-anthropic-ai";
 
 const router = Router();
+const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
+
+function toLoggableError(err: unknown) {
+  if (!err || typeof err !== "object") return { message: String(err) };
+  const anyErr = err as any;
+  return {
+    name: anyErr.name,
+    message: anyErr.message,
+    status: anyErr.status,
+    code: anyErr.code ?? anyErr.error?.error?.code,
+    type: anyErr.type ?? anyErr.error?.error?.type,
+    apiMessage: anyErr.error?.error?.message,
+  };
+}
 
 interface MentorMessage {
   role: "user" | "assistant";
@@ -24,6 +37,13 @@ Always end with a motivating sentence and the Udaan AI tagline "Turn your now in
 
 router.post("/mentor", async (req, res) => {
   try {
+    const groqApiKey = process.env.GROQ_API_KEY?.trim();
+    if (!groqApiKey) {
+      return res.status(503).json({
+        error: "Mentor AI is not configured. Set GROQ_API_KEY in .env to enable it.",
+      });
+    }
+
     const { messages, context } = req.body as {
       messages: MentorMessage[];
       context?: { currentQuestion?: string; studentName?: string };
@@ -42,28 +62,44 @@ router.post("/mentor", async (req, res) => {
     res.setHeader("Connection", "keep-alive");
     res.setHeader("Access-Control-Allow-Origin", "*");
 
-    const stream = anthropic.messages.stream({
-      model: "claude-sonnet-4-6",
+    const { groq } = await import("@workspace/integrations-groq");
+
+    const stream = await groq.chat.completions.create({
+      model: GROQ_MODEL,
       max_tokens: 8192,
-      system: systemWithContext,
-      messages: messages.map(m => ({ role: m.role, content: m.content })),
+      stream: true,
+      messages: [
+        { role: "system", content: systemWithContext },
+        ...messages.map(m => ({ role: m.role, content: m.content })),
+      ],
     });
 
-    for await (const event of stream) {
-      if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
-        res.write(`data: ${JSON.stringify({ content: event.delta.text })}\n\n`);
+    for await (const chunk of stream) {
+      const text = chunk.choices[0]?.delta?.content;
+      if (text) {
+        res.write(`data: ${JSON.stringify({ content: text })}\n\n`);
       }
     }
 
     res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
     res.end();
+    return;
   } catch (err) {
-    req.log.error({ err }, "Mentor AI error");
+    req.log.error(
+      {
+        err,
+        errorDetails: toLoggableError(err),
+        groqModel: GROQ_MODEL,
+        hasGroqApiKey: Boolean(process.env.GROQ_API_KEY?.trim()),
+      },
+      "Mentor AI error",
+    );
     if (!res.headersSent) {
       return res.status(500).json({ error: "Mentor AI failed" });
     }
     res.write(`data: ${JSON.stringify({ error: "Stream error", done: true })}\n\n`);
     res.end();
+    return;
   }
 });
 

@@ -238,6 +238,20 @@ export default function Library() {
               key={mode}
               data-testid={`button-view-${mode}`}
               onClick={() => setViewMode(mode as "grid" | "list")}
+              onMouseEnter={e => {
+                if (viewMode !== mode) {
+                  e.currentTarget.style.background = "rgba(124,58,237,0.1)";
+                  e.currentTarget.style.borderColor = "rgba(124,58,237,0.3)";
+                  e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                }
+              }}
+              onMouseLeave={e => {
+                if (viewMode !== mode) {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                }
+              }}
               style={{
                 padding: "0.6rem 0.875rem",
                 borderRadius: "10px",
@@ -247,6 +261,7 @@ export default function Library() {
                 cursor: "pointer",
                 fontSize: "0.8rem",
                 fontWeight: 600,
+                transition: "all 0.2s ease",
                 fontFamily: "'Space Grotesk', sans-serif",
               }}
             >
@@ -262,6 +277,23 @@ export default function Library() {
             key={cat}
             data-testid={`filter-category-${cat}`}
             onClick={() => setActiveCategory(cat)}
+            onMouseEnter={e => {
+              if (activeCategory !== cat) {
+                const colors = categoryColors[cat] || categoryColors["General"];
+                e.currentTarget.style.borderColor = colors.border + "66";
+                e.currentTarget.style.background = colors.bg + "66";
+                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }
+            }}
+            onMouseLeave={e => {
+              if (activeCategory !== cat) {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "rgba(255,255,255,0.45)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }
+            }}
             style={{
               padding: "0.4rem 1rem",
               borderRadius: "20px",
@@ -281,7 +313,7 @@ export default function Library() {
               fontSize: "0.8rem",
               fontWeight: 500,
               fontFamily: "'Space Grotesk', sans-serif",
-              transition: "all 0.2s",
+              transition: "all 0.2s ease",
               display: "flex",
               alignItems: "center",
               gap: "0.4rem",
@@ -348,6 +380,18 @@ export default function Library() {
           {search && (
             <button
               onClick={() => setSearch("")}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = "rgba(124,58,237,0.25)";
+                e.currentTarget.style.borderColor = "rgba(124,58,237,0.5)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.color = "#c084fc";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = "rgba(124,58,237,0.15)";
+                e.currentTarget.style.borderColor = "rgba(124,58,237,0.3)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.color = "#a78bfa";
+              }}
               style={{
                 marginTop: "0.75rem",
                 padding: "0.5rem 1.25rem",
@@ -358,6 +402,7 @@ export default function Library() {
                 cursor: "pointer",
                 fontSize: "0.85rem",
                 fontFamily: "'Space Grotesk', sans-serif",
+                transition: "all 0.2s ease",
               }}
             >
               Clear Search

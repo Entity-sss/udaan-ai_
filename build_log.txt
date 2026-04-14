@@ -1,0 +1,29 @@
+﻿node : 
+At line:1 char:1
++ node ./build.mjs 2>&1 | 
+Out-File -FilePath 
+"../../build_log.txt" 
+-Enc ...
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (:  
+  String) [], RemoteExc   
+ eption
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+  dist\index.mjs          
+         2.9mb
+  dist\pino-worker.mjs    
+       153.5kb
+  dist\pino-file.mjs      
+       142.1kb
+  dist\pino-pretty.mjs    
+       114.6kb
+  dist\thread-stream-worke
+r.mjs    7.3kb
+  ...and 5 more output 
+files...
+
+Done in 1300ms

@@ -8,10 +8,12 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, RadialBar, RadialBarChart, Legend,
 } from "recharts";
+import { getConfirmedRoadmapProfile } from "@/lib/assessment-draft";
 
 export default function Dashboard() {
   const [, setLocation] = useLocation();
   const student = getStoredStudent();
+  const confirmedRoadmap = getConfirmedRoadmapProfile();
 
   const { data: dashboard, isLoading } = useGetStudentDashboard(student?.id || "", {
     query: {
@@ -73,6 +75,45 @@ export default function Dashboard() {
       <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
         Welcome back, {dashboard?.student?.name || student.name}
       </p>
+
+      {confirmedRoadmap && (
+        <div style={{ ...cardStyle, marginBottom: "1.25rem" }}>
+          <h3 style={{ color: "white", fontWeight: 700, marginBottom: "0.8rem", fontSize: "1rem" }}>
+            Your Selected Skills
+          </h3>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "0.65rem", marginBottom: "0.9rem" }}>
+            {[...confirmedRoadmap.interests, ...confirmedRoadmap.extraSkills].map(skill => (
+              <div
+                key={skill}
+                style={{
+                  background: "rgba(124,58,237,0.16)",
+                  border: "1px solid rgba(124,58,237,0.35)",
+                  borderRadius: "12px",
+                  padding: "0.65rem 0.75rem",
+                  color: "white",
+                  fontWeight: 700,
+                }}
+              >
+                ✨ {skill}
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "0.65rem" }}>
+            <div style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: "10px", padding: "0.65rem" }}>
+              <p style={{ margin: 0, color: "rgba(255,255,255,0.55)", fontSize: "0.75rem" }}>Track</p>
+              <p style={{ margin: "0.25rem 0 0", color: "white", fontWeight: 700 }}>{confirmedRoadmap.field}</p>
+            </div>
+            <div style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: "10px", padding: "0.65rem" }}>
+              <p style={{ margin: 0, color: "rgba(255,255,255,0.55)", fontSize: "0.75rem" }}>Duration</p>
+              <p style={{ margin: "0.25rem 0 0", color: "white", fontWeight: 700 }}>{confirmedRoadmap.timelineWeeks} weeks</p>
+            </div>
+            <div style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.25)", borderRadius: "10px", padding: "0.65rem" }}>
+              <p style={{ margin: 0, color: "rgba(255,255,255,0.55)", fontSize: "0.75rem" }}>Phases</p>
+              <p style={{ margin: "0.25rem 0 0", color: "white", fontWeight: 700 }}>{confirmedRoadmap.phases}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div style={{ ...cardStyle, marginBottom: "1.5rem", display: "flex", gap: "1.5rem", flexWrap: "wrap", alignItems: "center" }}>
         <div
@@ -163,10 +204,20 @@ export default function Dashboard() {
           <div
             key={stat.label}
             data-testid={`stat-${stat.label.toLowerCase().replace(" ", "-")}`}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.boxShadow = `0 8px 25px ${stat.color}25`;
+              e.currentTarget.style.borderTopColor = stat.color;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
             style={{
               ...cardStyle,
               textAlign: "center",
               borderTop: `3px solid ${stat.color}`,
+              transition: "all 0.3s ease",
             }}
           >
             <p
@@ -182,6 +233,48 @@ export default function Dashboard() {
             <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.8rem" }}>{stat.label}</p>
           </div>
         ))}
+      </div>
+
+      <div style={{ ...cardStyle, marginBottom: "1.5rem" }}>
+        <h3 style={{ color: "white", fontWeight: 700, marginBottom: "0.8rem", fontSize: "1rem" }}>
+          Quick Access
+        </h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "0.7rem" }}>
+          {[
+            { label: "Skills", path: "/skills", icon: "🧩" },
+            { label: "My Roadmap", path: "/roadmap", icon: "🗺️" },
+            { label: "Courses", path: "/courses", icon: "📚" },
+            { label: "Mock Test", path: "/mock-test", icon: "🧠" },
+          ].map(item => (
+            <button
+              key={item.label}
+              onClick={() => setLocation(item.path)}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 4px 16px rgba(124,58,237,0.3)";
+                e.currentTarget.style.background = "linear-gradient(135deg, rgba(124,58,237,0.75), rgba(147,51,234,0.65))";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.background = "linear-gradient(135deg, rgba(124,58,237,0.6), rgba(147,51,234,0.55))";
+              }}
+              style={{
+                background: "linear-gradient(135deg, rgba(124,58,237,0.6), rgba(147,51,234,0.55))",
+                border: "1px solid rgba(124,58,237,0.45)",
+                color: "white",
+                borderRadius: "12px",
+                padding: "0.75rem 0.85rem",
+                fontWeight: 700,
+                textAlign: "left",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <span style={{ marginRight: "0.4rem" }}>{item.icon}</span>{item.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginBottom: "1.5rem" }}>

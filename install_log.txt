@@ -1,0 +1,19 @@
+﻿Scope: all 11 workspace projects
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 175, reused 154, downloaded 0, added 0
+Progress: resolved 469, reused 458, downloaded 0, added 0
+C:\Users\sanap\OneDrive\Desktop\PROJECT UDAAN AI\Udaan-Growth-System\Udaan-Growth-System\artifacts\udaan-ai:
+ΓÇëERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVERΓÇë "@tanstack/react-query@catalog:" isn't supported by any available resolver.
+
+This error happened while installing the dependencies of @workspace/api-client-react@0.0.0
+
+An external package outside of the pnpm workspace declared a dependency using
+the catalog protocol. This is likely a bug in that external package. Only
+packages within the pnpm workspace may use catalogs. Usages of the catalog
+protocol are replaced with real specifiers on 'pnpm publish'.
+
+This is likely a bug in the publishing automation of this package. Consider filing
+a bug with the authors of:
+
+  @workspace/api-client-react@0.0.0
+

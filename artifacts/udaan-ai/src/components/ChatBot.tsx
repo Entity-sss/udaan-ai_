@@ -156,19 +156,34 @@ export function ChatBot({ isOpen, onClose }: ChatBotProps) {
         ))}
         {sendMessage.isPending && (
           <div style={{ display: "flex", gap: "4px", padding: "0.75rem 1rem" }}>
-            {[0, 1, 2].map(i => (
-              <div
-                key={i}
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  background: "#7c3aed",
-                  animation: `bounce 1s ease-in-out ${i * 0.15}s infinite`,
-                }}
-              />
-            ))}
-            <style>{`@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }`}</style>
+            <div
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+                animation: "pulse 1.4s ease-in-out infinite",
+              }}
+            />
+            <div
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+                animation: "pulse 1.4s ease-in-out 0.2s infinite",
+              }}
+            />
+            <div
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+                animation: "pulse 1.4s ease-in-out 0.4s infinite",
+              }}
+            />
+            <style>{`@keyframes pulse { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1);opacity:1} }`}</style>
           </div>
         )}
         <div ref={bottomRef} />
@@ -180,6 +195,16 @@ export function ChatBot({ isOpen, onClose }: ChatBotProps) {
             <button
               key={i}
               onClick={() => setInput(s)}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = "rgba(124,58,237,0.2)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.borderColor = "rgba(124,58,237,0.4)";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = "rgba(124,58,237,0.1)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "rgba(124,58,237,0.25)";
+              }}
               style={{
                 padding: "0.3rem 0.7rem",
                 background: "rgba(124,58,237,0.1)",
@@ -189,6 +214,7 @@ export function ChatBot({ isOpen, onClose }: ChatBotProps) {
                 fontSize: "0.75rem",
                 cursor: "pointer",
                 fontFamily: "'Space Grotesk', sans-serif",
+                transition: "all 0.2s ease",
               }}
             >
               {s}
@@ -228,18 +254,34 @@ export function ChatBot({ isOpen, onClose }: ChatBotProps) {
           data-testid="button-send-message"
           onClick={handleSend}
           disabled={sendMessage.isPending}
+          onMouseEnter={e => {
+            if (!sendMessage.isPending) {
+              e.currentTarget.style.transform = "translateY(-1px)";
+              e.currentTarget.style.boxShadow = "0 4px 12px rgba(124,58,237,0.4)";
+            }
+          }}
+          onMouseLeave={e => {
+            if (!sendMessage.isPending) {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }
+          }}
           style={{
             padding: "0.625rem 1rem",
-            background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+            background: sendMessage.isPending 
+              ? "rgba(124,58,237,0.5)" 
+              : "linear-gradient(135deg, #7c3aed, #9333ea)",
             border: "none",
             borderRadius: "10px",
             color: "white",
             fontWeight: 600,
-            cursor: "pointer",
+            cursor: sendMessage.isPending ? "not-allowed" : "pointer",
             fontSize: "0.875rem",
+            transition: "all 0.2s ease",
+            opacity: sendMessage.isPending ? 0.7 : 1,
           }}
         >
-          Send
+          {sendMessage.isPending ? "Sending..." : "Send"}
         </button>
       </div>
     </div>

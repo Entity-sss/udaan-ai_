@@ -157,6 +157,7 @@ export default function ResumeBuilder() {
   const [newSkill, setNewSkill] = useState("");
   const [saved, setSaved] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [isEnhancing, setIsEnhancing] = useState<string | null>(null);
   const printRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -242,6 +243,26 @@ export default function ResumeBuilder() {
     }));
   }
 
+  async function enhanceText(type: "summary" | "experience" | "projects", text: string, updater: (newText: string) => void, id?: string) {
+    if (!text.trim()) return;
+    const loadingKey = id ? `${type}-${id}` : type;
+    setIsEnhancing(loadingKey);
+    try {
+      const res = await fetch("/api/resume/enhance", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, text }),
+      });
+      if (res.ok) {
+        const { enhancedText } = await res.json();
+        updater(enhancedText);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsEnhancing(null);
+    }
+  }
+
   const editorPanel = (
     <div style={{ flex: "0 0 340px", minWidth: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
       <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
@@ -287,7 +308,16 @@ export default function ResumeBuilder() {
               </div>
             ))}
             <div>
-              <label style={labelStyle}>Professional Summary</label>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <label style={labelStyle}>Professional Summary</label>
+                <button
+                  onClick={() => enhanceText("summary", data.summary, t => set("summary", t))}
+                  disabled={isEnhancing === "summary"}
+                  style={{ ...btnSmall, background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#c084fc", margin: "0 0 0.3rem" }}
+                >
+                  {isEnhancing === "summary" ? "Enhancing..." : "✨ AI Enhance"}
+                </button>
+              </div>
               <textarea
                 rows={4}
                 value={data.summary}
@@ -385,7 +415,16 @@ export default function ResumeBuilder() {
                   </div>
                 ))}
                 <div>
-                  <label style={labelStyle}>Key Responsibilities (one per line)</label>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <label style={labelStyle}>Key Responsibilities (one per line)</label>
+                    <button
+                      onClick={() => enhanceText("experience", ex.points, t => updateExperience(ex.id, "points", t), ex.id)}
+                      disabled={isEnhancing === `experience-${ex.id}`}
+                      style={{ ...btnSmall, background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#c084fc", margin: "0 0 0.3rem" }}
+                    >
+                      {isEnhancing === `experience-${ex.id}` ? "Enhancing..." : "✨ AI Enhance"}
+                    </button>
+                  </div>
                   <textarea rows={3} style={{ ...inputStyle, resize: "vertical" }} value={ex.points} placeholder={"• Built responsive UI components\n• Integrated REST APIs"} onChange={ev => updateExperience(ex.id, "points", ev.target.value)} onFocus={ev => (ev.target.style.borderColor = "rgba(124,58,237,0.6)")} onBlur={ev => (ev.target.style.borderColor = "rgba(124,58,237,0.2)")} />
                 </div>
                 <button onClick={() => removeExperience(ex.id)} style={{ ...btnSmall, background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)", color: "#fca5a5", alignSelf: "flex-start" }}>Remove</button>
@@ -413,7 +452,16 @@ export default function ResumeBuilder() {
                   </div>
                 ))}
                 <div>
-                  <label style={labelStyle}>Description</label>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <label style={labelStyle}>Description</label>
+                    <button
+                      onClick={() => enhanceText("projects", p.desc, t => updateProject(p.id, "desc", t), p.id)}
+                      disabled={isEnhancing === `projects-${p.id}`}
+                      style={{ ...btnSmall, background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)", color: "#c084fc", margin: "0 0 0.3rem" }}
+                    >
+                      {isEnhancing === `projects-${p.id}` ? "Enhancing..." : "✨ AI Enhance"}
+                    </button>
+                  </div>
                   <textarea rows={2} style={{ ...inputStyle, resize: "vertical" }} value={p.desc} placeholder="Brief description of what you built and what impact it had." onChange={ev => updateProject(p.id, "desc", ev.target.value)} onFocus={ev => (ev.target.style.borderColor = "rgba(124,58,237,0.6)")} onBlur={ev => (ev.target.style.borderColor = "rgba(124,58,237,0.2)")} />
                 </div>
                 <button onClick={() => removeProject(p.id)} style={{ ...btnSmall, background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)", color: "#fca5a5", alignSelf: "flex-start" }}>Remove</button>

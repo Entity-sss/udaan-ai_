@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 
@@ -137,14 +137,51 @@ export default function MockInterview() {
   const [screen, setScreen] = useState<Screen>("setup");
   const [role, setRole] = useState("Full Stack");
   const [level, setLevel] = useState("Junior");
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
-  const [currentIdx, setCurrentIdx] = useState(0);
+  const [evaluations, setEvaluations] = useState<Record<string, {feedback: string, score: number}>>({});
+  const [isLoading, setIsLoading] = useState(false);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [currentAnswer, setCurrentAnswer] = useState("");
   const [timeLeft, setTimeLeft] = useState(QUESTION_TIME);
   const [showHint, setShowHint] = useState(false);
   const [showSample, setShowSample] = useState<Record<string, boolean>>({});
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [questions, setQuestions] = useState<IQuestion[]>([]);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const proceedToNextRef = useRef<() => Promise<void>>(async () => {});
+
+  const proceedToNext = useCallback(async () => {
+    if (questions.length === 0) return;
+    const idx = currentIdx;
+    const qs = questions;
+    const q = qs[idx];
+    if (!q) return;
+    const ans = currentAnswer;
+    const newAnswers = { ...answers, [q.id]: ans };
+    setAnswers(newAnswers);
+
+    if (ans.trim()) {
+      fetch("/api/mock-interview/evaluate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q.question, answer: ans }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          setEvaluations(prev => ({ ...prev, [q.id]: data }));
+        })
+        .catch(console.error);
+    }
+
+    setCurrentAnswer("");
+    setShowHint(false);
+    if (idx < qs.length - 1) {
+      setCurrentIdx(prev => prev + 1);
+    } else {
+      setScreen("results");
+    }
+  }, [answers, currentAnswer, currentIdx, questions]);
+
+  proceedToNextRef.current = proceedToNext;
 
   useEffect(() => {
     if (screen !== "interview") return;
@@ -154,35 +191,42 @@ export default function MockInterview() {
         if (prev <= 1) {
           clearInterval(timer);
           toast({ title: "Time's up for this question! Moving on." });
-          proceedToNext();
+          queueMicrotask(() => void proceedToNextRef.current());
           return QUESTION_TIME;
         }
         return prev - 1;
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [screen, currentIdx]);
+  }, [screen, currentIdx, questions.length, toast]);
 
-  function startInterview() {
-    const qs = getInterviewQuestions(role, level);
-    setQuestions(qs);
-    setCurrentIdx(0);
-    setAnswers({});
-    setCurrentAnswer("");
-    setShowHint(false);
-    setScreen("interview");
-  }
-
-  function proceedToNext() {
-    const newAnswers = { ...answers, [questions[currentIdx].id]: currentAnswer };
-    setAnswers(newAnswers);
-    setCurrentAnswer("");
-    setShowHint(false);
-    if (currentIdx < questions.length - 1) {
-      setCurrentIdx(prev => prev + 1);
-    } else {
-      setAnswers(newAnswers);
-      setScreen("results");
+  async function startInterview() {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/mock-interview/generate", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role, level }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      const qs = (await res.json()) as IQuestion[];
+      setQuestions(Array.isArray(qs) && qs.length > 0 ? qs : getInterviewQuestions(role, level));
+      setCurrentIdx(0);
+      setAnswers({});
+      setEvaluations({});
+      setCurrentAnswer("");
+      setShowHint(false);
+      setScreen("interview");
+    } catch {
+      setQuestions(getInterviewQuestions(role, level));
+      setCurrentIdx(0);
+      setAnswers({});
+      setEvaluations({});
+      setCurrentAnswer("");
+      setShowHint(false);
+      setScreen("interview");
+      toast({ title: "Using offline question bank", description: "API unavailable — practice mode." });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -292,10 +336,10 @@ export default function MockInterview() {
 
         <button
           data-testid="button-start-interview"
-          onClick={startInterview}
-          style={{ ...btnBase, width: "100%", padding: "1rem", background: "linear-gradient(135deg, #7c3aed, #9333ea)", color: "white", fontSize: "1rem", boxShadow: "0 0 20px rgba(124,58,237,0.35)" }}
+          onClick={startInterview} disabled={isLoading}
+          style={{ ...btnBase, width: "100%", padding: "1rem", background: isLoading ? "rgba(124,58,237,0.3)" : "linear-gradient(135deg, #7c3aed, #9333ea)", color: "white", fontSize: "1rem", boxShadow: "0 0 20px rgba(124,58,237,0.35)", cursor: isLoading ? "wait": "pointer" }}
         >
-          Start Interview
+          {isLoading ? "Generating with AI..." : "Start Interview"}
         </button>
       </div>
     </div>
@@ -303,6 +347,13 @@ export default function MockInterview() {
 
   if (screen === "interview") {
     const q = questions[currentIdx];
+    if (!q || questions.length === 0) {
+      return (
+        <div style={{ padding: "1.5rem", maxWidth: "720px" }}>
+          <p style={{ color: "rgba(255,255,255,0.7)" }}>Loading questions…</p>
+        </div>
+      );
+    }
     const catColor = categoryColors[q.category] || "#a78bfa";
     return (
       <div style={{ padding: "1.5rem", maxWidth: "720px" }}>
@@ -498,9 +549,15 @@ export default function MockInterview() {
                     borderRadius: "10px",
                     borderLeft: "3px solid #10b981",
                   }}>
-                    <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.875rem", lineHeight: 1.7 }}>
-                      {q.sampleAnswer}
+                    <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.875rem", lineHeight: 1.7, marginBottom: "0.5rem" }}>
+                      <strong>Model Answer: </strong> {q.sampleAnswer}
                     </p>
+                    {evaluations[q.id] && (
+                      <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid rgba(16,185,129,0.2)" }}>
+                        <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "0.875rem", fontWeight: 700 }}>AI Feedback (Score: {evaluations[q.id].score}/10)</p>
+                        <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.875rem" }}>{evaluations[q.id].feedback}</p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

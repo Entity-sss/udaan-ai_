@@ -95,28 +95,67 @@ export default function Certificates() {
     "B": "#fbbf24",
   };
 
-  const demoCerts = (certificates || []).length === 0
-    ? [{
-        id: "demo-cert",
-        certCode: "UDN-CERT-2024-DEMO",
-        studentName: student.name,
-        studentId: student.studentId,
-        courseName: "Python for Machine Learning",
-        courseCategory: "AI/ML",
-        grade: "A+",
-        qrData: `https://udaan.ai/verify/UDN-CERT-2024-DEMO`,
-        issuedAt: new Date().toISOString(),
-      }]
-    : certificates;
+  type DisplayCert = {
+    id: string;
+    certCode: string;
+    studentName: string;
+    studentId: string;
+    courseName: string;
+    courseCategory: string;
+    grade?: string;
+    qrData?: string;
+    issuedAt: string;
+  };
+
+  const raw = certificates || [];
+  const demoCerts: DisplayCert[] =
+    raw.length === 0
+      ? [
+          {
+            id: "demo-cert",
+            certCode: "UDN-CERT-2024-DEMO",
+            studentName: student.name,
+            studentId: student.studentId,
+            courseName: "Python for Machine Learning",
+            courseCategory: "AI/ML",
+            grade: "A+",
+            qrData: `https://udaan.ai/verify/UDN-CERT-2024-DEMO`,
+            issuedAt: new Date().toISOString(),
+          },
+        ]
+      : raw.map(c => {
+          const anyC = c as {
+            id: string;
+            certCode: string;
+            courseId?: string;
+            skillName?: string | null;
+            issuedAt: string | Date;
+          };
+          const issued =
+            typeof anyC.issuedAt === "string" ? anyC.issuedAt : new Date(anyC.issuedAt).toISOString();
+          return {
+            id: anyC.id,
+            certCode: anyC.certCode,
+            studentName: student.name,
+            studentId: student.studentId,
+            courseName: anyC.skillName || anyC.courseId || "Skill track",
+            courseCategory: "Skill completion",
+            grade: "A",
+            qrData: `${typeof window !== "undefined" ? window.location.origin : ""}/api/certificates/verify/${anyC.certCode}`,
+            issuedAt: issued,
+          };
+        });
 
   return (
-    <div style={{ padding: "1.5rem", maxWidth: "1100px" }}>
+    <div style={{ padding: "1.5rem", maxWidth: "1100px" }} className="certificates-page">
+      <div className="no-print">
       <h1 style={{ fontSize: "1.75rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
         My Certificates
       </h1>
       <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
         Authenticated credentials for completed courses
       </p>
+      </div>
 
       <div
         style={{
@@ -128,7 +167,9 @@ export default function Certificates() {
         {demoCerts?.map(cert => (
           <div
             key={cert.id}
+            id={`udaan-cert-${cert.id}`}
             data-testid={`certificate-${cert.id}`}
+            className="udaan-certificate-card"
             style={{
               background: "linear-gradient(135deg, #0d0d2b 0%, #1a0a3d 50%, #0d0d2b 100%)",
               border: "2px solid rgba(124,58,237,0.5)",
@@ -295,15 +336,41 @@ export default function Certificates() {
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem" }}>
+            <div className="cert-actions no-print" style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem", flexWrap: "wrap" }}>
               <button
                 data-testid={`button-share-${cert.id}`}
+                type="button"
                 onClick={() => {
-                  navigator.clipboard?.writeText(cert.qrData || "");
-                  toast({ title: "Certificate link copied!" });
+                  const verifyUrl = cert.qrData || `${window.location.origin}/api/certificates/verify/${cert.certCode}`;
+                  const linkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(verifyUrl)}`;
+                  window.open(linkedIn, "_blank", "noopener,noreferrer");
                 }}
                 style={{
                   flex: 1,
+                  minWidth: "120px",
+                  padding: "0.6rem",
+                  background: "rgba(10,102,194,0.2)",
+                  border: "1px solid rgba(10,102,194,0.45)",
+                  borderRadius: "10px",
+                  color: "#93c5fd",
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontWeight: 600,
+                }}
+              >
+                Share on LinkedIn
+              </button>
+              <button
+                data-testid={`button-copy-${cert.id}`}
+                type="button"
+                onClick={() => {
+                  navigator.clipboard?.writeText(cert.qrData || "");
+                  toast({ title: "Verification link copied" });
+                }}
+                style={{
+                  flex: 1,
+                  minWidth: "120px",
                   padding: "0.6rem",
                   background: "rgba(124,58,237,0.15)",
                   border: "1px solid rgba(124,58,237,0.3)",
@@ -315,15 +382,23 @@ export default function Certificates() {
                   fontWeight: 600,
                 }}
               >
-                Share Link
+                Copy link
               </button>
               <button
                 data-testid={`button-download-${cert.id}`}
-                onClick={() => toast({ title: "Certificate download feature coming soon!" })}
+                type="button"
+                onClick={() => {
+                  toast({
+                    title: "Save as PDF",
+                    description: "In the print dialog, choose “Save as PDF” or “Microsoft Print to PDF”.",
+                  });
+                  window.print();
+                }}
                 style={{
                   flex: 1,
+                  minWidth: "120px",
                   padding: "0.6rem",
-                  background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+                  background: "linear-gradient(135deg, #4c35c8, #9333ea)",
                   border: "none",
                   borderRadius: "10px",
                   color: "white",
@@ -333,7 +408,7 @@ export default function Certificates() {
                   fontWeight: 600,
                 }}
               >
-                Download
+                Download PDF
               </button>
             </div>
           </div>

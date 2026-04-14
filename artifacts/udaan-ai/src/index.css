@@ -272,3 +272,15 @@
     inset: -1px;
   }
 }
+
+@media print {
+  .print-hide-sidebar,
+  .no-print {
+    display: none !important;
+  }
+  .udaan-certificate-card {
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Landing from "@/pages/Landing";
 import Signup from "@/pages/Signup";
 import Assessment from "@/pages/Assessment";
+import AssessmentConfirm from "@/pages/AssessmentConfirm";
 import AppLayout from "@/pages/AppLayout";
 import { getStoredStudent } from "@/lib/auth";
 
@@ -34,6 +35,11 @@ function Router() {
           <Assessment />
         </AuthGuard>
       </Route>
+      <Route path="/assessment/confirm">
+        <AuthGuard>
+          <AssessmentConfirm />
+        </AuthGuard>
+      </Route>
       <Route path="/dashboard">
         <AuthGuard>
           <AppLayout />
@@ -45,6 +51,46 @@ function Router() {
         </AuthGuard>
       </Route>
       <Route path="/courses/:courseId">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId/skill-final">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId/project">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId/:levelId/level-test">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId/:levelId/:phaseId/test">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId/:levelId/:phaseId">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId/:levelId">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills/:skillId">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/skills">
         <AuthGuard>
           <AppLayout />
         </AuthGuard>
@@ -80,6 +126,11 @@ function Router() {
         </AuthGuard>
       </Route>
       <Route path="/resume">
+        <AuthGuard>
+          <AppLayout />
+        </AuthGuard>
+      </Route>
+      <Route path="/resume-builder">
         <AuthGuard>
           <AppLayout />
         </AuthGuard>

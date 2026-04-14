@@ -4,14 +4,15 @@ import logoPath from "/logo.png";
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: "D" },
-  { label: "My Roadmap", path: "/roadmap", icon: "R" },
+  { label: "My Roadmap", path: "/roadmap", icon: "M" },
+  { label: "Skills", path: "/skills", icon: "S" },
   { label: "Courses", path: "/courses", icon: "C" },
   { label: "Library", path: "/library", icon: "L" },
   { label: "Mock Test", path: "/mock-test", icon: "T" },
   { label: "Mock Interview", path: "/mock-interview", icon: "I" },
-  { label: "Resume Builder", path: "/resume", icon: "R" },
+  { label: "Resume Builder", path: "/resume-builder", icon: "B" },
   { label: "Progress", path: "/progress", icon: "P" },
-  { label: "Certificates", path: "/certificates", icon: "C" },
+  { label: "Certificates", path: "/certificates", icon: "E" },
 ];
 
 interface SidebarProps {
@@ -29,11 +30,12 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
 
   return (
     <div
+      className="print-hide-sidebar"
       style={{
         width: "240px",
         minHeight: "100vh",
-        background: "rgba(8, 5, 25, 0.95)",
-        borderRight: "1px solid rgba(124,58,237,0.2)",
+        background: "rgba(13, 11, 30, 0.96)",
+        borderRight: "1px solid rgba(76,53,200,0.22)",
         display: "flex",
         flexDirection: "column",
         padding: "1.5rem 1rem",
@@ -71,8 +73,8 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
 
       <div
         style={{
-          background: "rgba(124,58,237,0.1)",
-          border: "1px solid rgba(124,58,237,0.2)",
+          background: "rgba(76,53,200,0.1)",
+          border: "1px solid rgba(76,53,200,0.2)",
           borderRadius: "16px",
           padding: "1rem",
           marginBottom: "1.5rem",
@@ -83,7 +85,7 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
             width: "48px",
             height: "48px",
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+            background: "linear-gradient(135deg, #4c35c8, #9333ea)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -105,11 +107,13 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
 
       <nav style={{ flex: 1 }}>
         {navItems.map(item => {
-          const isActive = location === item.path || (item.path !== "/roadmap" && location.startsWith(item.path));
+          const isActive =
+            location === item.path ||
+            (item.path !== "/dashboard" && item.path !== "/roadmap" && location.startsWith(item.path));
           return (
             <button
-              key={item.path}
-              data-testid={`nav-${item.label.toLowerCase().replace(" ", "-")}`}
+              key={item.path + item.label}
+              data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
               onClick={() => setLocation(item.path)}
               style={{
                 width: "100%",
@@ -119,7 +123,7 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
                 padding: "0.75rem 1rem",
                 borderRadius: "12px",
                 border: "none",
-                background: isActive ? "rgba(124,58,237,0.25)" : "transparent",
+                background: isActive ? "rgba(76,53,200,0.25)" : "transparent",
                 color: isActive ? "#c084fc" : "rgba(255,255,255,0.55)",
                 cursor: "pointer",
                 fontSize: "0.9rem",
@@ -128,11 +132,11 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
                 transition: "all 0.2s",
                 marginBottom: "0.25rem",
                 fontFamily: "'Space Grotesk', sans-serif",
-                borderLeft: isActive ? "3px solid #7c3aed" : "3px solid transparent",
+                borderLeft: isActive ? "3px solid #4c35c8" : "3px solid transparent",
               }}
               onMouseEnter={e => {
                 if (!isActive) {
-                  e.currentTarget.style.background = "rgba(124,58,237,0.1)";
+                  e.currentTarget.style.background = "rgba(76,53,200,0.1)";
                   e.currentTarget.style.color = "rgba(255,255,255,0.8)";
                 }
               }}
@@ -148,7 +152,7 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
                   width: "28px",
                   height: "28px",
                   borderRadius: "8px",
-                  background: isActive ? "rgba(124,58,237,0.3)" : "rgba(255,255,255,0.06)",
+                  background: isActive ? "rgba(76,53,200,0.3)" : "rgba(255,255,255,0.06)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -165,15 +169,15 @@ export function Sidebar({ onChatOpen }: SidebarProps) {
         })}
       </nav>
 
-      <div style={{ paddingTop: "1rem", borderTop: "1px solid rgba(124,58,237,0.15)" }}>
+      <div style={{ paddingTop: "1rem", borderTop: "1px solid rgba(76,53,200,0.15)" }}>
         <button
           data-testid="button-ai-chat"
           onClick={onChatOpen}
           style={{
             width: "100%",
             padding: "0.75rem 1rem",
-            background: "linear-gradient(135deg, rgba(124,58,237,0.2), rgba(147,51,234,0.2))",
-            border: "1px solid rgba(124,58,237,0.35)",
+            background: "linear-gradient(135deg, rgba(76,53,200,0.2), rgba(147,51,234,0.2))",
+            border: "1px solid rgba(76,53,200,0.35)",
             borderRadius: "12px",
             color: "#c084fc",
             fontWeight: 600,

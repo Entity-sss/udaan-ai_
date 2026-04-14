@@ -13,6 +13,14 @@ import Library from "./Library";
 import MockTest from "./MockTest";
 import MockInterview from "./MockInterview";
 import ResumeBuilder from "./ResumeBuilder";
+import Skills from "./Skills";
+import SkillLevels from "./SkillLevels";
+import SkillPhases from "./SkillPhases";
+import PhaseContent from "./PhaseContent";
+import PhaseQuizPage from "./PhaseQuizPage";
+import LevelQuizPage from "./LevelQuizPage";
+import FinalSkillQuizPage from "./FinalSkillQuizPage";
+import SkillProject from "./SkillProject";
 
 export default function AppLayout() {
   const [chatOpen, setChatOpen] = useState(false);
@@ -21,7 +29,7 @@ export default function AppLayout() {
     <div
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #050511 0%, #0d0d2b 50%, #0a0520 100%)",
+        background: "linear-gradient(135deg, #0d0b1e 0%, #151030 50%, #0d0b1e 100%)",
         display: "flex",
         position: "relative",
       }}
@@ -50,6 +58,15 @@ export default function AppLayout() {
             <Route path="/mock-test" component={MockTest} />
             <Route path="/mock-interview" component={MockInterview} />
             <Route path="/resume" component={ResumeBuilder} />
+            <Route path="/resume-builder" component={ResumeBuilder} />
+            <Route path="/skills/:skillId/skill-final" component={FinalSkillQuizPage} />
+            <Route path="/skills/:skillId/project" component={SkillProject} />
+            <Route path="/skills/:skillId/:levelId/level-test" component={LevelQuizPage} />
+            <Route path="/skills/:skillId/:levelId/:phaseId/test" component={PhaseQuizPage} />
+            <Route path="/skills/:skillId/:levelId/:phaseId" component={PhaseContent} />
+            <Route path="/skills/:skillId/:levelId" component={SkillPhases} />
+            <Route path="/skills/:skillId" component={SkillLevels} />
+            <Route path="/skills" component={Skills} />
           </Switch>
         </main>
       </div>
