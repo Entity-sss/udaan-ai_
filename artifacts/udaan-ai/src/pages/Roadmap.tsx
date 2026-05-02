@@ -36,6 +36,594 @@ function estimatePhases(timePerDayMinutes: number): number {
   return 4;
 }
 
+// SECTION 2 - JOB OPPORTUNITIES COMPONENT
+function JobOpportunities({ skills, track }: { skills: string[]; track: string }) {
+  const skillSlugs = skills.map(s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""));
+  const hasSkill = (id: string) => skillSlugs.includes(id) || skills.some(s => s.toLowerCase().includes(id));
+
+  const hasWeb = hasSkill("web") || hasSkill("html") || hasSkill("javascript") || hasSkill("react") || hasSkill("node");
+  const hasPython = hasSkill("python");
+  const hasML = hasSkill("machine-learning") || hasSkill("ml") || hasSkill("ai");
+  const hasMedical = hasSkill("biology") || hasSkill("neet") || hasSkill("mbbs") || hasSkill("medical");
+  const hasPharmacy = hasSkill("pharmacy") || hasSkill("pharmacology") || hasSkill("gpat");
+  const hasHR = hasSkill("hr") || hasSkill("recruitment") || hasSkill("human-resources");
+  const hasDesign = hasSkill("design") || hasSkill("ui") || hasSkill("ux") || hasSkill("figma") || hasSkill("canva") || hasSkill("graphic-design");
+  const hasMarketing = hasSkill("digital-marketing") || hasSkill("social-media") || hasSkill("seo") || hasSkill("content-creation") || hasSkill("marketing");
+  const hasFinance = hasSkill("accounting") || hasSkill("finance") || hasSkill("tally") || hasSkill("ca") || hasSkill("excel");
+
+  return (
+    <div style={{ marginBottom: "3rem" }}>
+      <h2 style={{ fontSize: "1.8rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
+        🎯 Your Career Destination
+      </h2>
+      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", marginBottom: "2rem" }}>
+        Here's where this roadmap takes you
+      </p>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
+        {/* Tech Track Jobs */}
+        {(hasWeb || hasPython || hasML) && (
+          <>
+            <JobCard
+              title="Junior Web Developer"
+              salary="₹2.5 - 5 LPA"
+              timeline="After 6-8 months of learning"
+              companies={["TCS", "Wipro", "Local IT agencies", "Web development firms"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Frontend Developer"
+              salary="₹3 - 6 LPA"
+              timeline="After 8-12 months"
+              companies={["Startups", "Product companies", "Juspay", "Razorpay", "Groww"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Freelance Web Developer"
+              salary="₹10k - 50k/month"
+              timeline="After 4-6 months"
+              companies={["Upwork", "Fiverr", "Freelancer"]}
+              type="Freelance"
+            />
+            <JobCard
+              title="Full Stack Developer"
+              salary="₹5 - 10 LPA"
+              timeline="After 1-1.5 years"
+              companies={["Any tech company", "startups"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Senior Developer (2-3 years)"
+              salary="₹10 - 18 LPA"
+              timeline="Growth Path"
+              companies={["Top product companies"]}
+              type="Growth Path"
+            />
+          </>
+        )}
+
+        {/* HR Track Jobs */}
+        {hasHR && (
+          <>
+            <JobCard
+              title="HR Executive"
+              salary="₹2 - 3.5 LPA"
+              timeline="Entry Level"
+              companies={["Any mid-large company", "IT firms"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="HR Recruiter"
+              salary="₹1.8 - 3 LPA"
+              timeline="Entry Level"
+              companies={["Consulting firms", "TeamLease", "Randstad"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Talent Acquisition"
+              salary="₹3 - 5 LPA"
+              timeline="After 1-2 years"
+              companies={["Large corporates", "MNCs"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="HR Manager (2-3 yrs)"
+              salary="₹5 - 10 LPA"
+              timeline="Growth Path"
+              companies={["Senior positions"]}
+              type="Growth Path"
+            />
+            <JobCard
+              title="Freelance HR Consultant"
+              salary="₹5k - 20k/month"
+              timeline="After 6-12 months"
+              companies={["Small businesses", "Startups"]}
+              type="Freelance"
+            />
+          </>
+        )}
+
+        {/* Marketing Track Jobs */}
+        {hasMarketing && (
+          <>
+            <JobCard
+              title="Digital Marketing Executive"
+              salary="₹2 - 3.5 LPA"
+              timeline="Entry Level"
+              companies={["Marketing agencies", "Brands", "Startups"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Social Media Manager"
+              salary="₹2 - 4 LPA"
+              timeline="After 6-12 months"
+              companies={["Digital agencies", "E-commerce"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="SEO Executive"
+              salary="₹2 - 3.5 LPA"
+              timeline="Entry Level"
+              companies={["SEO agencies", "Content companies"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Freelance Marketer"
+              salary="₹10k - 30k/month"
+              timeline="After 4-6 months"
+              companies={["Upwork", "Fiverr", "Direct clients"]}
+              type="Freelance"
+            />
+            <JobCard
+              title="Marketing Manager (2-3 yrs)"
+              salary="₹6 - 12 LPA"
+              timeline="Growth Path"
+              companies={["Senior positions", "Head of Marketing"]}
+              type="Growth Path"
+            />
+          </>
+        )}
+
+        {/* Design Track Jobs */}
+        {hasDesign && (
+          <>
+            <JobCard
+              title="Junior UI Designer"
+              salary="₹2.5 - 4.5 LPA"
+              timeline="Entry Level"
+              companies={["Design agencies", "Startups", "Product companies"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Graphic Designer"
+              salary="₹2 - 4 LPA"
+              timeline="Entry Level"
+              companies={["Advertising agencies", "Media houses"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Freelance Designer"
+              salary="₹5k - 30k/project"
+              timeline="After 4-6 months"
+              companies={["Upwork", "Fiverr", "Direct clients"]}
+              type="Freelance"
+            />
+            <JobCard
+              title="Senior Designer (2-3 yrs)"
+              salary="₹8 - 15 LPA"
+              timeline="Growth Path"
+              companies={["Senior positions", "Lead Designer"]}
+              type="Growth Path"
+            />
+            <JobCard
+              title="Product Designer"
+              salary="₹10 - 18 LPA"
+              timeline="Growth Path"
+              companies={["Top product companies", "Tech giants"]}
+              type="Growth Path"
+            />
+          </>
+        )}
+
+        {/* Finance/CA Track Jobs */}
+        {hasFinance && (
+          <>
+            <JobCard
+              title="Accountant"
+              salary="₹2 - 4 LPA"
+              timeline="Entry Level"
+              companies={["Small businesses", "Accounting firms"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Finance Analyst"
+              salary="₹3 - 5 LPA"
+              timeline="After 1-2 years"
+              companies={["Corporates", "Banks", "Financial institutions"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Tax Consultant"
+              salary="₹2 - 3.5 LPA"
+              timeline="Entry Level"
+              companies={["Tax firms", "Consulting"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Freelance Accountant"
+              salary="₹5k - 20k/month"
+              timeline="After 6-12 months"
+              companies={["Small businesses", "Individuals"]}
+              type="Freelance"
+            />
+            <JobCard
+              title="CA (after qualification)"
+              salary="₹7 - 15 LPA"
+              timeline="Growth Path"
+              companies={["Big 4", "MNCs", "Senior positions"]}
+              type="Growth Path"
+            />
+          </>
+        )}
+
+        {/* Medical/NEET Track Jobs */}
+        {hasMedical && (
+          <>
+            <JobCard
+              title="MBBS Doctor (5.5 years)"
+              salary="₹3 - 8 LPA"
+              timeline="After MBBS"
+              companies={["Hospitals", "Clinics"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Government Doctor"
+              salary="₹3 - 6 LPA"
+              timeline="After MBBS"
+              companies={["Government hospitals", "PHCs"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Private Hospital"
+              salary="₹8 - 20 LPA"
+              timeline="After MBBS + Experience"
+              companies={["Private hospitals", "Corporate hospitals"]}
+              type="Full Time"
+            />
+            <JobCard
+              title="Specialist (MD/MS)"
+              salary="₹15 - 50 LPA"
+              timeline="After specialization"
+              companies={["Top hospitals", "Specialty centers"]}
+              type="Growth Path"
+            />
+            <JobCard
+              title="Ayurvedic Doctor (BAMS)"
+              salary="₹2 - 6 LPA"
+              timeline="After BAMS"
+              companies={["Ayurvedic hospitals", "Private practice"]}
+              type="Full Time"
+            />
+          </>
+        )}
+
+        {!(hasWeb || hasPython || hasML || hasMedical || hasPharmacy || hasHR || hasDesign || hasMarketing || hasFinance) && (
+          <div style={{ gridColumn: "1 / -1", background: "rgba(13,10,40,0.8)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: "16px", padding: "2rem", textAlign: "center" }}>
+            <p style={{ color: "rgba(255,255,255,0.7)", margin: 0, fontSize: "1rem" }}>
+              Complete your assessment to see personalized career guidance for your selected skills.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function JobCard({ title, salary, timeline, companies, type }: { title: string; salary: string; timeline: string; companies: string[]; type: string }) {
+  return (
+    <div style={{
+      background: "rgba(13,10,40,0.85)",
+      border: "1px solid rgba(124,58,237,0.25)",
+      borderRadius: "16px",
+      padding: "1.5rem",
+      transition: "all 0.3s ease",
+      cursor: "default",
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
+        <h3 style={{ color: "white", fontWeight: 700, fontSize: "1.1rem", margin: 0, lineHeight: 1.3 }}>
+          {title}
+        </h3>
+        <span style={{
+          background: "rgba(16,185,129,0.15)",
+          color: "#34d399",
+          fontWeight: 700,
+          fontSize: "0.75rem",
+          padding: "0.3rem 0.6rem",
+          borderRadius: "8px",
+          border: "1px solid rgba(16,185,129,0.3)",
+          whiteSpace: "nowrap",
+        }}>
+          {salary}
+        </span>
+      </div>
+
+      <div style={{ marginBottom: "1rem" }}>
+        <span style={{
+          background: "rgba(124,58,237,0.15)",
+          color: "#a78bfa",
+          fontWeight: 600,
+          fontSize: "0.75rem",
+          padding: "0.25rem 0.6rem",
+          borderRadius: "6px",
+          border: "1px solid rgba(124,58,237,0.3)",
+        }}>
+          {timeline}
+        </span>
+      </div>
+
+      <div style={{ marginBottom: "1rem" }}>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", margin: "0 0 0.5rem" }}>Companies:</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+          {companies.map((company, idx) => (
+            <span key={idx} style={{
+              background: "rgba(124,58,237,0.1)",
+              color: "#c4b5fd",
+              fontSize: "0.7rem",
+              padding: "0.2rem 0.5rem",
+              borderRadius: "4px",
+              border: "1px solid rgba(124,58,237,0.2)",
+            }}>
+              {company}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <span style={{
+        background: type === "Freelance" ? "rgba(245,158,11,0.15)" : type === "Growth Path" ? "rgba(236,72,153,0.15)" : "rgba(59,130,246,0.15)",
+        color: type === "Freelance" ? "#fbbf24" : type === "Growth Path" ? "#f472b6" : "#60a5fa",
+        fontWeight: 600,
+        fontSize: "0.7rem",
+        padding: "0.25rem 0.6rem",
+        borderRadius: "6px",
+        border: type === "Freelance" ? "1px solid rgba(245,158,11,0.3)" : type === "Growth Path" ? "1px solid rgba(236,72,153,0.3)" : "1px solid rgba(59,130,246,0.3)",
+      }}>
+        {type}
+      </span>
+    </div>
+  );
+}
+
+// SECTION 3 - LEARNING ROADMAP STEPS COMPONENT
+function LearningRoadmapSteps({ skills, skillIconMap, setLocation }: { skills: string[]; skillIconMap: Record<string, string>; setLocation: (path: string) => void }) {
+  return (
+    <div style={{ marginBottom: "3rem" }}>
+      <h2 style={{ fontSize: "1.8rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
+        📚 Your Learning Path
+      </h2>
+      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", marginBottom: "2rem" }}>
+        Step by step journey to your goal
+      </p>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+        {skills.map((skill, index) => (
+          <div key={skill} style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+              <div
+                style={{
+                  width: "56px",
+                  height: "56px",
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontWeight: 800,
+                  fontSize: "1.4rem",
+                  boxShadow: "0 0 20px rgba(124,58,237,0.4)",
+                  border: "3px solid rgba(124,58,237,0.3)",
+                }}
+              >
+                {skillIconMap[skill] || "✨"}
+              </div>
+              {index < skills.length - 1 && (
+                <div
+                  style={{
+                    width: "3px",
+                    minHeight: "60px",
+                    background: "linear-gradient(to bottom, #7c3aed, rgba(124,58,237,0.2))",
+                    marginTop: "0.75rem",
+                  }}
+                />
+              )}
+            </div>
+
+            <div
+              style={{
+                flex: 1,
+                background: "rgba(124,58,237,0.08)",
+                border: "1px solid rgba(124,58,237,0.25)",
+                borderRadius: "16px",
+                padding: "1.5rem",
+                marginBottom: index < skills.length - 1 ? "1.5rem" : 0,
+                transition: "all 0.3s ease",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <span
+                    style={{
+                      fontSize: "0.8rem",
+                      fontWeight: 800,
+                      color: "#a78bfa",
+                      background: "rgba(124,58,237,0.2)",
+                      border: "1px solid rgba(124,58,237,0.4)",
+                      borderRadius: "20px",
+                      padding: "0.3rem 0.7rem",
+                    }}
+                  >
+                    Step {index + 1}
+                  </span>
+                  <h4 style={{ color: "white", fontWeight: 700, fontSize: "1.15rem", margin: 0 }}>
+                    {skill}
+                  </h4>
+                </div>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    fontWeight: 600,
+                    color: index === 0 ? "#34d399" : index === skills.length - 1 ? "#f472b6" : "#60a5fa",
+                    background: index === 0 ? "rgba(52,211,153,0.15)" : index === skills.length - 1 ? "rgba(244,114,182,0.15)" : "rgba(96,165,250,0.15)",
+                    border: index === 0 ? "1px solid rgba(52,211,153,0.3)" : index === skills.length - 1 ? "1px solid rgba(244,114,182,0.3)" : "1px solid rgba(96,165,250,0.3)",
+                    borderRadius: "20px",
+                    padding: "0.25rem 0.6rem",
+                  }}
+                >
+                  {index === 0 ? "Beginner" : index === skills.length - 1 ? "Advanced" : "Intermediate"}
+                </span>
+              </div>
+
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", margin: "0 0 1rem" }}>
+                {index === 0 && "Foundation skill - Start here to build your base"}
+                {index === skills.length - 1 && index > 0 && "Advanced skill - Build upon previous skills to master the domain"}
+                {index > 0 && index < skills.length - 1 && "Intermediate skill - Progress from foundations to advanced concepts"}
+              </p>
+
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.8rem" }}>
+                  ⏱️ Estimated: {index === 0 ? "2-3 weeks" : index === skills.length - 1 ? "4-6 weeks" : "3-4 weeks"}
+                </span>
+                <button
+                  onClick={() => setLocation(`/skill/${skill.toLowerCase().replace(/\s+/g, '-')}/beginner/1`)}
+                  style={{
+                    padding: "0.5rem 1.25rem",
+                    background: "linear-gradient(135deg, #7c3aed, #9333ea)",
+                    border: "none",
+                    borderRadius: "10px",
+                    color: "white",
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                    cursor: "pointer",
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Start Learning
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// SECTION 4 - PROGRESS TRACKER COMPONENT
+function ProgressTracker({ confirmedProfile }: { confirmedProfile: any }) {
+  const overallProgress = Storage.getOverallProgress();
+  const estimatedDuration = confirmedProfile?.timePerDayMinutes ? formatDuration(confirmedProfile.timePerDayMinutes) : "12-16 weeks";
+
+  return (
+    <div style={{ marginBottom: "2rem" }}>
+      <h2 style={{ fontSize: "1.8rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
+        📊 Your Progress
+      </h2>
+      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", marginBottom: "2rem" }}>
+        Track your learning journey
+      </p>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem", marginBottom: "2rem" }}>
+        <div style={{
+          background: "rgba(13,10,40,0.8)",
+          border: "1px solid rgba(124,58,237,0.2)",
+          borderRadius: "16px",
+          padding: "1.5rem",
+          textAlign: "center",
+        }}>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", margin: "0 0 0.5rem" }}>Overall Completion</p>
+          <p style={{ color: "#34d399", fontSize: "2.5rem", fontWeight: 800, margin: 0 }}>
+            {Math.round((overallProgress.phasesCompleted / 24) * 100)}%
+          </p>
+        </div>
+
+        <div style={{
+          background: "rgba(13,10,40,0.8)",
+          border: "1px solid rgba(124,58,237,0.2)",
+          borderRadius: "16px",
+          padding: "1.5rem",
+          textAlign: "center",
+        }}>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", margin: "0 0 0.5rem" }}>Phases Completed</p>
+          <p style={{ color: "#a78bfa", fontSize: "2.5rem", fontWeight: 800, margin: 0 }}>
+            {overallProgress.phasesCompleted}
+          </p>
+        </div>
+
+        <div style={{
+          background: "rgba(13,10,40,0.8)",
+          border: "1px solid rgba(124,58,237,0.2)",
+          borderRadius: "16px",
+          padding: "1.5rem",
+          textAlign: "center",
+        }}>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", margin: "0 0 0.5rem" }}>Total Points</p>
+          <p style={{ color: "#fbbf24", fontSize: "2.5rem", fontWeight: 800, margin: 0 }}>
+            {overallProgress.totalPoints}
+          </p>
+        </div>
+
+        <div style={{
+          background: "rgba(13,10,40,0.8)",
+          border: "1px solid rgba(124,58,237,0.2)",
+          borderRadius: "16px",
+          padding: "1.5rem",
+          textAlign: "center",
+        }}>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", margin: "0 0 0.5rem" }}>Estimated Duration</p>
+          <p style={{ color: "#60a5fa", fontSize: "1.5rem", fontWeight: 700, margin: 0 }}>
+            {estimatedDuration}
+          </p>
+        </div>
+      </div>
+
+      <div style={{
+        background: "rgba(13,10,40,0.8)",
+        border: "1px solid rgba(124,58,237,0.2)",
+        borderRadius: "16px",
+        padding: "1.5rem",
+      }}>
+        <h3 style={{ color: "white", fontWeight: 600, marginBottom: "1rem", fontSize: "1rem" }}>
+          Weekly Progress
+        </h3>
+        <ResponsiveContainer width="100%" height={200}>
+          <AreaChart data={mockProgressData}>
+            <defs>
+              <linearGradient id="progressGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#7c3aed" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#7c3aed" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(124,58,237,0.1)" />
+            <XAxis dataKey="week" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <Tooltip
+              contentStyle={{
+                background: "rgba(13,10,40,0.95)",
+                border: "1px solid rgba(124,58,237,0.3)",
+                borderRadius: "10px",
+                color: "white",
+              }}
+            />
+            <Area type="monotone" dataKey="progress" stroke="#7c3aed" strokeWidth={2} fill="url(#progressGrad)" />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
 export default function Roadmap() {
   const [, setLocation] = useLocation();
   const student = getStoredStudent();
@@ -234,426 +822,34 @@ export default function Roadmap() {
     marginBottom: "1.5rem",
   };
 
-  return (
-    <div style={{ padding: "1.5rem", maxWidth: "1000px" }}>
-      <h1 style={{ fontSize: "1.75rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
-        Your Learning Roadmap
-      </h1>
-      <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
-        {finalRoadmap.description || `Turn your now into your next — your personalized path to mastery`}
-      </p>
+  const userTrack = confirmedProfile?.field || confirmedProfile?.interests?.[0] || "General Tech";
+  const userName = student?.name || "Student";
 
-      <div style={{ ...cardStyle, marginBottom: "2rem" }}>
-        <h3 style={{ color: "white", fontWeight: 600, marginBottom: "1rem", fontSize: "1rem" }}>
-          Progress Overview
-        </h3>
-        <ResponsiveContainer width="100%" height={180}>
-          <AreaChart data={mockProgressData}>
-            <defs>
-              <linearGradient id="progressGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#7c3aed" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#7c3aed" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(124,58,237,0.1)" />
-            <XAxis dataKey="week" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
-            <Tooltip
-              contentStyle={{
-                background: "rgba(13,10,40,0.95)",
-                border: "1px solid rgba(124,58,237,0.3)",
-                borderRadius: "10px",
-                color: "white",
-              }}
-            />
-            <Area type="monotone" dataKey="progress" stroke="#7c3aed" strokeWidth={2} fill="url(#progressGrad)" />
-          </AreaChart>
-        </ResponsiveContainer>
+  return (
+    <div style={{ padding: "1.5rem", maxWidth: "1200px" }}>
+      {/* SECTION 1 - HEADER */}
+      <div style={{ marginBottom: "2.5rem" }}>
+        <h1 style={{ fontSize: "2rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
+          Your Personalised Roadmap
+        </h1>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", marginBottom: "0.5rem" }}>
+          Personalized based on your goals in <span style={{ color: "#a78bfa", fontWeight: 600 }}>{userTrack}</span>
+        </p>
+        <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.9rem" }}>
+          Welcome, <span style={{ color: "#c4b5fd", fontWeight: 600 }}>{userName}</span>
+        </p>
       </div>
 
+      {/* SECTION 2 - JOB OPPORTUNITIES (FIRST) */}
+      <JobOpportunities skills={assessmentSkills} track={userTrack} />
+
+      {/* SECTION 3 - LEARNING ROADMAP STEPS */}
       {assessmentSkills.length > 0 && (
-        <div style={{ ...cardStyle, marginBottom: "2rem" }}>
-          <h3 style={{ color: "white", fontWeight: 600, marginBottom: "0.5rem", fontSize: "1rem" }}>
-            Your Learning Skills Flow
-          </h3>
-          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", marginBottom: "1.5rem" }}>
-            Skills selected during your assessment, ordered for optimal learning progression
-          </p>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {assessmentSkills.map((skill, index) => (
-              <div key={skill} style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "50%",
-                      background: "linear-gradient(135deg, #7c3aed, #9333ea)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "white",
-                      fontWeight: 800,
-                      fontSize: "1.3rem",
-                      boxShadow: "0 0 15px rgba(124,58,237,0.4)",
-                    }}
-                  >
-                    {skillIconMap[skill] || "✨"}
-                  </div>
-                  {index < assessmentSkills.length - 1 && (
-                    <div
-                      style={{
-                        width: "2px",
-                        minHeight: "40px",
-                        background: "linear-gradient(to bottom, #7c3aed, rgba(124,58,237,0.2))",
-                        marginTop: "0.5rem",
-                      }}
-                    />
-                  )}
-                </div>
-
-                <div
-                  style={{
-                    flex: 1,
-                    background: "rgba(124,58,237,0.08)",
-                    border: "1px solid rgba(124,58,237,0.25)",
-                    borderRadius: "12px",
-                    padding: "1rem",
-                    marginBottom: index < assessmentSkills.length - 1 ? "1rem" : 0,
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.25rem" }}>
-                    <h4 style={{ color: "white", fontWeight: 700, fontSize: "1rem", margin: 0 }}>
-                      {skill}
-                    </h4>
-                    <span
-                      style={{
-                        fontSize: "0.7rem",
-                        fontWeight: 700,
-                        color: "#a78bfa",
-                        background: "rgba(124,58,237,0.15)",
-                        border: "1px solid rgba(124,58,237,0.3)",
-                        borderRadius: "20px",
-                        padding: "0.2rem 0.6rem",
-                      }}
-                    >
-                      Step {index + 1}
-                    </span>
-                  </div>
-                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", margin: 0 }}>
-                    {index === 0 && "Foundation skill - Start here"}
-                    {index === assessmentSkills.length - 1 && index > 0 && "Advanced skill - Build upon previous skills"}
-                    {index > 0 && index < assessmentSkills.length - 1 && "Intermediate skill - Progress from foundations"}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <LearningRoadmapSteps skills={assessmentSkills} skillIconMap={skillIconMap} setLocation={setLocation} />
       )}
 
-      <div style={{ position: "relative" }}>
-        {(finalRoadmap.phases as any[] || []).map((phase: any, idx: number) => (
-          <div
-            key={phase.phase}
-            style={{ display: "flex", gap: "1.5rem", marginBottom: "2rem" }}
-          >
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  background: statusColors[phase.status],
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "white",
-                  fontWeight: 800,
-                  fontSize: "1.1rem",
-                  flexShrink: 0,
-                  boxShadow: phase.status === "active" ? `0 0 20px rgba(124,58,237,0.5)` : "none",
-                  border: `2px solid ${statusColors[phase.status]}`,
-                }}
-              >
-                {phase.status === "completed" ? "✓" : phase.phase}
-              </div>
-              {idx < (finalRoadmap.phases as any[]).length - 1 && (
-                <div
-                  style={{
-                    width: "2px",
-                    flex: 1,
-                    minHeight: "60px",
-                    background: `linear-gradient(to bottom, ${statusColors[phase.status]}, rgba(124,58,237,0.1))`,
-                    marginTop: "0.5rem",
-                  }}
-                />
-              )}
-            </div>
-
-            <div
-              style={{
-                flex: 1,
-                background: statusBgColors[phase.status],
-                border: `1px solid ${statusColors[phase.status]}30`,
-                borderRadius: "16px",
-                padding: "1.5rem",
-                opacity: phase.status === "locked" ? 0.5 : 1,
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
-                <div>
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: statusColors[phase.status],
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                    }}
-                  >
-                    Phase {phase.phase}
-                  </span>
-                  <h3 style={{ color: "white", fontWeight: 700, fontSize: "1.1rem", margin: "0.25rem 0" }}>
-                    {phase.title}
-                  </h3>
-                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem" }}>{phase.description}</p>
-                </div>
-                <span
-                  style={{
-                    padding: "0.25rem 0.875rem",
-                    borderRadius: "20px",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    background: `${statusColors[phase.status]}20`,
-                    border: `1px solid ${statusColors[phase.status]}40`,
-                    color: statusColors[phase.status],
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {phase.status}
-                </span>
-              </div>
-
-              {phase.status !== "locked" && (
-                <div style={{ marginBottom: "1rem" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem" }}>
-                    <span style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem" }}>Progress</span>
-                    <span style={{ color: statusColors[phase.status], fontSize: "0.75rem", fontWeight: 600 }}>
-                      {phase.completionPercentage || 0}%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      height: "6px",
-                      background: "rgba(255,255,255,0.08)",
-                      borderRadius: "3px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: "100%",
-                        width: `${phase.completionPercentage || 0}%`,
-                        background: `linear-gradient(90deg, ${statusColors[phase.status]}, ${statusColors[phase.status]}88)`,
-                        borderRadius: "3px",
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {(phase.courses || []).length > 0 && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                  {(phase.courses as any[]).map((course: any) => (
-                    <button
-                      key={course.id}
-                      data-testid={`button-course-${course.id}`}
-                      onClick={() => phase.status !== "locked" && setLocation(`/courses/${course.id}`)}
-                      style={{
-                        padding: "0.4rem 0.875rem",
-                        background: phase.status === "locked" ? "rgba(255,255,255,0.05)" : "rgba(124,58,237,0.15)",
-                        border: `1px solid ${phase.status === "locked" ? "rgba(255,255,255,0.1)" : "rgba(124,58,237,0.3)"}`,
-                        borderRadius: "8px",
-                        color: phase.status === "locked" ? "rgba(255,255,255,0.35)" : "#c084fc",
-                        fontSize: "0.8rem",
-                        cursor: phase.status === "locked" ? "not-allowed" : "pointer",
-                        fontFamily: "'Space Grotesk', sans-serif",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {course.title}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <JobGuidance skills={assessmentSkills} />
-    </div>
-  );
-}
-
-function JobCard({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
-  return (
-    <div style={{ background: "rgba(13,10,40,0.85)", border: "1px solid rgba(124,58,237,0.22)", borderRadius: "16px", padding: "1.25rem" }}>
-      <h3 style={{ color: "white", fontWeight: 700, fontSize: "1.05rem", marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <span>{icon}</span> {title}
-      </h3>
-      {children}
-    </div>
-  );
-}
-
-function JobRow({ title, salary, companies }: { title: string; salary: string; companies: string[] }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.6rem 0", borderBottom: "1px solid rgba(124,58,237,0.1)" }}>
-      <div>
-        <p style={{ margin: 0, color: "white", fontWeight: 600, fontSize: "0.9rem" }}>{title}</p>
-        {companies.length > 0 && (
-          <p style={{ margin: "0.2rem 0 0", color: "rgba(255,255,255,0.5)", fontSize: "0.75rem" }}>Companies: {companies.join(", ")}</p>
-        )}
-      </div>
-      <span style={{ background: "rgba(16,185,129,0.15)", color: "#34d399", fontWeight: 700, fontSize: "0.78rem", padding: "0.3rem 0.6rem", borderRadius: "8px", border: "1px solid rgba(16,185,129,0.3)", whiteSpace: "nowrap" }}>
-        {salary}
-      </span>
-    </div>
-  );
-}
-
-function Tip({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.18)", borderRadius: "10px", padding: "0.7rem 0.85rem", marginTop: "0.8rem", marginBottom: "0.6rem" }}>
-      <p style={{ margin: "0 0 0.3rem", color: "#c4b5fd", fontWeight: 700, fontSize: "0.8rem" }}>💡 {title}</p>
-      <p style={{ margin: 0, color: "rgba(255,255,255,0.65)", fontSize: "0.8rem" }}>{children}</p>
-    </div>
-  );
-}
-
-function AfterYears({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ background: "rgba(124,58,237,0.06)", borderLeft: "3px solid #7c3aed", borderRadius: "0 8px 8px 0", padding: "0.6rem 0.85rem", marginTop: "0.4rem" }}>
-      <p style={{ margin: "0 0 0.3rem", color: "#a78bfa", fontWeight: 700, fontSize: "0.8rem" }}>{title}</p>
-      <p style={{ margin: 0, color: "rgba(255,255,255,0.65)", fontSize: "0.8rem" }}>{children}</p>
-    </div>
-  );
-}
-
-function JobGuidance({ skills }: { skills: string[] }) {
-  const skillSlugs = skills.map(s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""));
-  const hasSkill = (id: string) => skillSlugs.includes(id) || skills.some(s => s.toLowerCase().includes(id));
-
-  const hasPython = hasSkill("python");
-  const hasData = hasSkill("data-science") || hasSkill("data-analysis") || hasSkill("machine-learning");
-  const hasWeb = hasSkill("web") || hasSkill("html") || hasSkill("javascript") || hasSkill("react");
-  const hasUIUX = hasSkill("design") || hasSkill("ui") || hasSkill("ux") || hasSkill("figma") || hasSkill("canva") || hasSkill("graphic-design");
-  const hasMarketing = hasSkill("digital-marketing") || hasSkill("social-media") || hasSkill("seo") || hasSkill("content-creation");
-  const hasCyber = hasSkill("cybersecurity") || hasSkill("ethical-hacking") || hasSkill("penetration-testing");
-  const hasSoft = hasSkill("communication") || hasSkill("soft-skills") || hasSkill("public-speaking") || hasSkill("leadership");
-  const hasAccounting = hasSkill("accounting") || hasSkill("tally") || hasSkill("finance");
-  const hasContent = hasSkill("content-creation") || hasSkill("social-media") || hasSkill("youtube");
-
-  return (
-    <div style={{ marginTop: "2.5rem" }}>
-      <h2 style={{ fontSize: "1.4rem", fontWeight: 700, color: "white", marginBottom: "1.25rem" }}>
-        Your Career Roadmap 🎯
-      </h2>
-      <div style={{ display: "grid", gap: "1rem" }}>
-        {hasPython && hasData && (
-          <JobCard title="Data Science & AI" icon="🤖">
-            <JobRow title="Data Analyst" salary="₹3-5 LPA" companies={["TCS", "Infosys", "Wipro", "Juspay", "Razorpay", "MuSigma", "Fractal Analytics"]} />
-            <JobRow title="Junior Data Scientist" salary="₹4-7 LPA" companies={["Flipkart", "Paytm", "Swiggy", "Zomato", "startups"]} />
-            <JobRow title="Business Analyst" salary="₹3-5 LPA" companies={["Any mid-large company"]} />
-            <Tip title="If no job immediately">Freelance data analysis on Upwork/Fiverr · Build Kaggle portfolio · Contribute to open source projects</Tip>
-            <AfterYears title="After 2-3 years">Senior Data Scientist → ₹12-20 LPA · ML Engineer → ₹15-25 LPA</AfterYears>
-          </JobCard>
-        )}
-
-        {hasWeb && (
-          <JobCard title="Web Development" icon="🌐">
-            <JobRow title="Junior Web Developer" salary="₹2.5-5 LPA" companies={["TCS", "Wipro", "local IT agencies", "web development firms", "startups"]} />
-            <JobRow title="Frontend Developer" salary="₹3-6 LPA" companies={["Product startups", "agencies"]} />
-            <JobRow title="Full Stack Developer (after 1 year)" salary="₹5-8 LPA" companies={[]} />
-            <Tip title="If no job immediately">Freelance websites on Fiverr, Upwork · Build client websites locally · Create WordPress sites for businesses</Tip>
-            <AfterYears title="After 2-3 years">Senior Developer → ₹10-18 LPA · Tech Lead → ₹15-25 LPA</AfterYears>
-          </JobCard>
-        )}
-
-        {hasUIUX && (
-          <JobCard title="UI/UX Design" icon="🎨">
-            <JobRow title="Junior UI Designer" salary="₹2.5-4.5 LPA" companies={["Design agencies", "startups", "product companies", "app companies"]} />
-            <JobRow title="Product Designer" salary="₹3-6 LPA" companies={["Tech startups", "SaaS companies"]} />
-            <Tip title="If no job immediately">Freelance logo design on Fiverr · Create social media designs for businesses · Design mobile apps for local businesses</Tip>
-            <AfterYears title="After 2-3 years">Senior UX Designer → ₹10-18 LPA · Product Design Lead → ₹15-22 LPA</AfterYears>
-          </JobCard>
-        )}
-
-        {hasMarketing && (
-          <JobCard title="Digital Marketing" icon="📈">
-            <JobRow title="Digital Marketing Executive" salary="₹2-4 LPA" companies={["Marketing agencies", "e-commerce companies", "startups", "brands"]} />
-            <JobRow title="Social Media Manager" salary="₹2.5-4.5 LPA" companies={["Any business with online presence"]} />
-            <JobRow title="SEO Executive" salary="₹2-3.5 LPA" companies={[]} />
-            <Tip title="If no job immediately">Freelance social media management · Run ads for local businesses · Content writing and SEO freelancing</Tip>
-            <AfterYears title="After 2-3 years">Digital Marketing Manager → ₹6-12 LPA · Growth Marketing Lead → ₹10-18 LPA</AfterYears>
-          </JobCard>
-        )}
-
-        {hasCyber && (
-          <JobCard title="Cybersecurity" icon="🛡️">
-            <JobRow title="Security Analyst" salary="₹3-6 LPA" companies={["IT firms", "banks", "government", "cybersecurity companies"]} />
-            <JobRow title="Junior Penetration Tester" salary="₹3-5 LPA" companies={[]} />
-            <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.2)", borderRadius: "8px", padding: "0.6rem 0.8rem", marginBottom: "0.6rem", marginTop: "0.4rem" }}>
-              <p style={{ margin: 0, color: "#fbbf24", fontSize: "0.8rem", fontWeight: 600 }}>⚠️ Honest note: Entry level cybersecurity jobs are fewer than development jobs. Building a strong portfolio and certifications (CEH, CompTIA Security+) is essential.</p>
-            </div>
-            <Tip title="If no job immediately">Bug bounty programs (HackerOne, Bugcrowd) · Build security tools on GitHub · Freelance security audits for small businesses</Tip>
-            <AfterYears title="After 2-3 years">Senior Security Engineer → ₹12-20 LPA · Security Consultant → ₹15-25 LPA</AfterYears>
-          </JobCard>
-        )}
-
-        {hasSoft && !hasPython && !hasWeb && !hasUIUX && !hasMarketing && !hasCyber && !hasAccounting && (
-          <JobCard title="Soft Skills" icon="💬">
-            <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.2)", borderRadius: "8px", padding: "0.6rem 0.8rem", marginBottom: "0.6rem" }}>
-              <p style={{ margin: 0, color: "#fbbf24", fontSize: "0.8rem", fontWeight: 600 }}>ℹ️ Direct jobs from soft skills alone are rare. Soft skills SUPPORT your other technical skills.</p>
-            </div>
-            <JobRow title="Public Speaking → Corporate Trainer" salary="₹3-8 LPA" companies={[]} />
-            <JobRow title="Communication → HR roles" salary="₹2.5-5 LPA" companies={[]} />
-            <JobRow title="Leadership → Management roles" salary="Varies" companies={["After experience"]} />
-          </JobCard>
-        )}
-
-        {hasAccounting && (
-          <JobCard title="Accounting & Finance" icon="💰">
-            <JobRow title="Accountant" salary="₹2-4 LPA" companies={["Any company", "CA firms", "banks", "financial institutions"]} />
-            <JobRow title="Finance Analyst" salary="₹3-5 LPA" companies={[]} />
-            <JobRow title="Tax Assistant" salary="₹2-3.5 LPA" companies={[]} />
-            <Tip title="If no job immediately">Freelance accounting for small businesses · File ITR returns for individuals/businesses · Tally work for local shops and businesses</Tip>
-            <AfterYears title="After 2-3 years (with CA)">CA → ₹7-15 LPA · Finance Manager → ₹8-15 LPA</AfterYears>
-          </JobCard>
-        )}
-
-        {hasContent && (
-          <JobCard title="Content Creation" icon="🎬">
-            <JobRow title="Content Creator" salary="₹2-4 LPA" companies={["Digital agencies", "brands", "media companies", "startups"]} />
-            <JobRow title="Social Media Executive" salary="₹2-3.5 LPA" companies={[]} />
-            <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)", borderRadius: "8px", padding: "0.6rem 0.8rem", marginBottom: "0.6rem", marginTop: "0.4rem" }}>
-              <p style={{ margin: 0, color: "#34d399", fontSize: "0.8rem", fontWeight: 600 }}>💡 Building your own income (better option): YouTube monetization (6-12 months to start earning) · Instagram brand deals (after 10k followers) · Blog monetization through ads/affiliates</p>
-            </div>
-            <AfterYears title="Realistic timeline for own income">Month 1-6: Build audience, no income · Month 6-12: Small income ₹5-20k/month · Year 2+: ₹30k-2L+/month (depends on niche)</AfterYears>
-          </JobCard>
-        )}
-
-        {!(hasPython || hasWeb || hasUIUX || hasMarketing || hasCyber || hasAccounting || hasContent) && (
-          <div style={{ background: "rgba(13,10,40,0.8)", border: "1px solid rgba(124,58,237,0.2)", borderRadius: "16px", padding: "1.5rem" }}>
-            <p style={{ color: "rgba(255,255,255,0.7)", margin: 0, fontSize: "0.9rem" }}>
-              Complete your assessment to see personalized career guidance for your selected skills.
-            </p>
-          </div>
-        )}
-      </div>
+      {/* SECTION 4 - PROGRESS TRACKER (BOTTOM) */}
+      <ProgressTracker confirmedProfile={confirmedProfile} />
     </div>
   );
 }

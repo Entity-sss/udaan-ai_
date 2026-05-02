@@ -253,6 +253,7 @@ export default function AssessmentConfirm() {
 
       // Save to localStorage using Storage utility
       Storage.saveRoadmap(roadmapData);
+      Storage.saveAssessmentAnswers(currentDraft.profile);
 
       // Try real API first
       const res = await fetch("/api/assessment/confirm", {
@@ -286,6 +287,7 @@ export default function AssessmentConfirm() {
 
       // Save to localStorage using Storage utility
       Storage.saveRoadmap(roadmapData);
+      Storage.saveAssessmentAnswers(currentDraft.profile);
 
       setConfirmedRoadmapProfile(roadmapData);
       setStoredStudent({ ...currentStudent, assessmentCompleted: true });

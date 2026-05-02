@@ -32,8 +32,9 @@ export default function SkillPhases() {
     if (!level) return [];
     return level.phases.map((phase, index) => {
       const phaseNumber = index + 1;
-      // Phase 1 always unlocked, phase N unlocked if previous phase completed
-      const unlocked = phaseNumber === 1 || storageProgress[phaseNumber - 1]?.completed === true;
+      // Use Storage.getPhaseStatus for consistent phase status checking
+      const phaseStatus = Storage.getPhaseStatus(skillId || '', levelId || 'beginner', phaseNumber);
+      const unlocked = phaseStatus !== 'locked';
       const mockDone = isPhaseMockPassed(phase.id, progress);
       const contentDone = isPhaseContentDone(phase.id, progress);
       let status: string;
@@ -43,7 +44,7 @@ export default function SkillPhases() {
       else status = "🔒 Locked";
       return { phase, index, unlocked, mockDone, contentDone, status };
     });
-  }, [level, progress, storageProgress]);
+  }, [level, progress, skillId, levelId]);
 
   const unlockedCount = phases.filter(p => p.unlocked).length;
   const justUnlocked = unlockedCount > prevUnlockedRef.current;

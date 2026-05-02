@@ -148,6 +148,26 @@ export default function Certificates() {
 
   return (
     <div style={{ padding: "1.5rem", maxWidth: "1100px" }} className="certificates-page">
+      <style>{`
+        @media print {
+          body * { visibility: hidden !important; }
+          .udaan-certificate-card, .udaan-certificate-card * { visibility: visible !important; }
+          .udaan-certificate-card { 
+            position: fixed !important; 
+            top: 0 !important; 
+            left: 0 !important; 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            margin: 0 !important;
+            padding: 2rem !important;
+            border: none !important;
+            box-shadow: none !important;
+            page-break-after: always;
+          }
+          .no-print { display: none !important; }
+          .cert-actions { display: none !important; }
+        }
+      `}</style>
       <div className="no-print">
       <h1 style={{ fontSize: "1.75rem", fontWeight: 700, color: "white", marginBottom: "0.5rem" }}>
         My Certificates

@@ -18,6 +18,9 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [mobileError, setMobileError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const register = useRegisterStudent();
   const sendOtp = useSendOtp();
@@ -42,8 +45,35 @@ export default function Signup() {
     const trimmedName = name.trim();
     const trimmedMobile = mobile.trim().replace(/\s+/g, "");
     const trimmedEmail = email.trim();
-    if (!trimmedName || !trimmedMobile) {
-      toast({ title: "Please fill in your name and mobile number", variant: "destructive" });
+    
+    // Validate name
+    if (!trimmedName) {
+      setNameError("Name is required");
+    } else {
+      setNameError("");
+    }
+    
+    // Validate mobile - must be 10 digits
+    const mobileDigits = trimmedMobile.replace(/\D/g, "");
+    if (!trimmedMobile) {
+      setMobileError("Mobile number is required");
+    } else if (mobileDigits.length !== 10) {
+      setMobileError("Mobile number must be 10 digits");
+    } else {
+      setMobileError("");
+    }
+    
+    // Validate email - must have @ and .com/.in etc
+    if (!trimmedEmail) {
+      setEmailError("Email is required");
+    } else if (!trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
+    }
+    
+    // Don't submit if any errors
+    if (!trimmedName || !trimmedMobile || mobileDigits.length !== 10 || !trimmedEmail || !trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
       return;
     }
     
@@ -284,11 +314,12 @@ export default function Signup() {
                   type="text"
                   placeholder="Your full name"
                   value={name}
-                  onChange={e => setName(e.target.value)}
-                  style={inputStyle}
+                  onChange={e => { setName(e.target.value); setNameError(""); }}
+                  style={{ ...inputStyle, borderColor: nameError ? "#ef4444" : "rgba(124,58,237,0.3)" }}
                   onFocus={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.7)")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.3)")}
+                  onBlur={e => (e.currentTarget.style.borderColor = nameError ? "#ef4444" : "rgba(124,58,237,0.3)")}
                 />
+                {nameError && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{nameError}</p>}
               </div>
             )}
 
@@ -299,11 +330,12 @@ export default function Signup() {
                 type="tel"
                 placeholder="+91 XXXXX XXXXX"
                 value={mobile}
-                onChange={e => setMobile(e.target.value)}
-                style={inputStyle}
+                onChange={e => { setMobile(e.target.value); setMobileError(""); }}
+                style={{ ...inputStyle, borderColor: mobileError ? "#ef4444" : "rgba(124,58,237,0.3)" }}
                 onFocus={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.7)")}
-                onBlur={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.3)")}
+                onBlur={e => (e.currentTarget.style.borderColor = mobileError ? "#ef4444" : "rgba(124,58,237,0.3)")}
               />
+              {mobileError && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{mobileError}</p>}
             </div>
 
             {mode === "register" && (
@@ -314,11 +346,12 @@ export default function Signup() {
                   type="email"
                   placeholder="your@email.com"
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  style={inputStyle}
+                  onChange={e => { setEmail(e.target.value); setEmailError(""); }}
+                  style={{ ...inputStyle, borderColor: emailError ? "#ef4444" : "rgba(124,58,237,0.3)" }}
                   onFocus={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.7)")}
-                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(124,58,237,0.3)")}
+                  onBlur={e => (e.currentTarget.style.borderColor = emailError ? "#ef4444" : "rgba(124,58,237,0.3)")}
                 />
+                {emailError && <p style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>{emailError}</p>}
               </div>
             )}
 

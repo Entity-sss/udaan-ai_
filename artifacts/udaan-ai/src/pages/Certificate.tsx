@@ -26,29 +26,8 @@ export default function Certificate() {
   });
 
   function downloadPDF() {
-    const certificateElement = document.getElementById("certificate-container");
-    if (!certificateElement) return;
-
-    const html2canvas = (window as any).html2canvas;
-    const jspdf = (window as any).jspdf;
-
-    if (html2canvas && jspdf) {
-      html2canvas(certificateElement, {
-        scale: 2,
-        backgroundColor: "#0d0b1e",
-      }).then((canvas: HTMLCanvasElement) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jspdf.jsPDF({
-          orientation: "landscape",
-          unit: "px",
-          format: [canvas.width, canvas.height],
-        });
-        pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-        pdf.save(`Certificate-${skillId}.pdf`);
-      });
-    } else {
-      alert("PDF download requires html2canvas and jspdf libraries. Please install them first.");
-    }
+    // Use window.print() for PDF generation
+    window.print();
   }
 
   function shareLinkedIn() {
@@ -62,9 +41,28 @@ export default function Certificate() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0d0b1e", position: "relative", padding: "2rem" }}>
+      <style>{`
+        @media print {
+          body * { visibility: hidden !important; }
+          #certificate-container, #certificate-container * { visibility: visible !important; }
+          #certificate-container { 
+            position: fixed !important; 
+            top: 0 !important; 
+            left: 0 !important; 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            background: #0d0b1e !important; 
+            padding: 2rem !important;
+            margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+          }
+          .no-print { display: none !important; }
+        }
+      `}</style>
       <StarField />
       <div style={{ position: "relative", zIndex: 10, maxWidth: "900px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+        <div className="no-print" style={{ textAlign: "center", marginBottom: "2rem" }}>
           <button
             onClick={() => window.history.back()}
             style={{

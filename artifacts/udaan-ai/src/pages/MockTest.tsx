@@ -198,6 +198,32 @@ const accountingPrinciplesQuestions: Question[] = [
   { id: "10", question: "What is an invoice?", options: ["A receipt of payment", "A document requesting payment for goods or services", "A bank statement", "A tax document"], correct: 1 },
 ];
 
+const hrQuestions: Question[] = [
+  { id: "1", question: "What is the primary role of HR?", options: ["Only hiring employees", "Managing employee relations and organizational development", "Only firing employees", "Only payroll management"], correct: 1 },
+  { id: "2", question: "What is recruitment?", options: ["Firing employees", "Process of finding and hiring new employees", "Managing payroll", "Training employees"], correct: 1 },
+  { id: "3", question: "What is onboarding?", options: ["Saying goodbye to employees", "Process of integrating new employees into the organization", "Conducting interviews", "Creating job descriptions"], correct: 1 },
+  { id: "4", question: "What is performance appraisal?", options: ["Evaluating employee job performance", "Hiring new employees", "Firing employees", "Managing payroll"], correct: 0 },
+  { id: "5", question: "What is employee engagement?", options: ["Employees working overtime", "Emotional commitment employees have to the organization", "Employee salary", "Employee attendance"], correct: 1 },
+  { id: "6", question: "What is a job description?", options: ["Employee resume", "Document outlining job duties and responsibilities", "Employee contract", "Company policy"], correct: 1 },
+  { id: "7", question: "What is the purpose of an interview?", options: ["To chat with candidates", "To assess candidate suitability for the job", "To reject candidates", "To hire everyone"], correct: 1 },
+  { id: "8", question: "What is HR analytics?", options: ["Analyzing employee data to make better decisions", "Creating employee schedules", "Managing payroll", "Conducting interviews"], correct: 0 },
+  { id: "9", question: "What is talent management?", options: ["Managing employee salaries", "Strategic process of attracting developing and retaining talent", "Firing employees", "Creating job postings"], correct: 1 },
+  { id: "10", question: "What is labor law compliance?", options: ["Ignoring labor laws", "Following legal requirements related to employment", "Creating company policies", "Managing employee benefits"], correct: 1 },
+];
+
+const marketingQuestions: Question[] = [
+  { id: "1", question: "What is marketing?", options: ["Selling products only", "Process of creating communicating and delivering value to customers", "Advertising only", "Pricing only"], correct: 1 },
+  { id: "2", question: "What are the 4 Ps of marketing?", options: ["Product Price Place Promotion", "People Process Physical Evidence", "Product Performance Price Profit", "Planning Positioning Packaging Pricing"], correct: 0 },
+  { id: "3", question: "What is a target market?", options: ["All customers worldwide", "Specific group of customers a company aims to reach", "Competitors only", "Employees only"], correct: 1 },
+  { id: "4", question: "What is brand positioning?", options: ["Creating a logo", "How a brand is perceived in the minds of customers", "Setting product prices", "Hiring employees"], correct: 1 },
+  { id: "5", question: "What is market research?", options: ["Researching competitors only", "Gathering and analyzing data about market and customers", "Creating advertisements", "Setting prices"], correct: 1 },
+  { id: "6", question: "What is a marketing strategy?", options: ["Random advertising", "Comprehensive plan to achieve marketing goals", "Hiring sales team", "Creating a website"], correct: 1 },
+  { id: "7", question: "What is customer segmentation?", options: ["Treating all customers the same", "Dividing customers into groups based on characteristics", "Ignoring customers", "Firing customers"], correct: 1 },
+  { id: "8", question: "What is a marketing mix?", options: ["Mix of colors in ads", "Combination of product price place and promotion", "Mix of employees", "Mix of competitors"], correct: 1 },
+  { id: "9", question: "What is brand equity?", options: ["Brand's stock price", "Value and strength of a brand in the market", "Brand's logo", "Brand's office location"], correct: 1 },
+  { id: "10", question: "What is competitive analysis?", options: ["Analyzing company's own performance", "Evaluating competitors' strengths and weaknesses", "Ignoring competitors", "Copying competitors"], correct: 1 },
+];
+
 function getQuestionsForSkill(skill: string, level: string, phase: number): Question[] {
   const skillLower = skill.toLowerCase().replace(/\s+/g, '-');
   const levelLower = level.toLowerCase();
@@ -216,19 +242,49 @@ function getQuestionsForSkill(skill: string, level: string, phase: number): Ques
   if (skillLower === "social-media-marketing") return socialMediaMarketingQuestions;
   if (skillLower === "accounting-principles" || skillLower === "accounting") return accountingPrinciplesQuestions;
   
+  // HR Skills
+  if (skillLower === "hr-fundamentals" || skillLower === "recruitment-skills" || skillLower === "ms-excel-for-hr" || 
+      skillLower === "labor-laws-basics" || skillLower === "hr-analytics" || skillLower === "interview-techniques" || 
+      skillLower === "linkedin-for-hr") return hrQuestions;
+  
+  // Marketing Skills
+  if (skillLower === "marketing-fundamentals" || skillLower === "google-analytics" || skillLower === "seo-basics") return marketingQuestions;
+  
+  // Finance Skills
+  if (skillLower === "financial-accounting" || skillLower === "ms-excel-advanced" || skillLower === "financial-analysis" ||
+      skillLower === "tally-prime" || skillLower === "investment-basics" || skillLower === "financial-modeling") return accountingPrinciplesQuestions;
+  
+  // Web Development Skills
+  if (skillLower === "html-css" || skillLower === "javascript" || skillLower === "react" || skillLower === "node-js" ||
+      skillLower === "database-basics" || skillLower === "git" || skillLower === "dsa-basics" || skillLower === "system-design-basics") return webDevQuestions;
+  
+  // AI/ML Skills
+  if (skillLower === "statistics" || skillLower === "data-analysis" || skillLower === "deep-learning" ||
+      skillLower === "ml-projects" || skillLower === "model-deployment") return dataScienceQuestions;
+  
+  // Medical/Pharmacy Skills
+  if (skillLower === "biology-advanced" || skillLower === "chemistry-advanced" || skillLower === "physics-for-neet" ||
+      skillLower === "neet-mock-tests" || skillLower === "medical-terminology" || skillLower === "anatomy-basics" ||
+      skillLower === "study-techniques" || skillLower === "pharmaceutical-chemistry" || skillLower === "pharmacology" ||
+      skillLower === "gpat-preparation" || skillLower === "drug-regulations" || skillLower === "clinical-pharmacy-basics") return dataScienceQuestions;
+  
+  // Health Tech Skills
+  if (skillLower === "python-basics" || skillLower === "healthcare-data" || skillLower === "bioinformatics" ||
+      skillLower === "excel-for-healthcare" || skillLower === "research-methods") return dataScienceQuestions;
+  
   // Fallback to partial matches for backward compatibility
   if (skillLower.includes("python")) return pythonQuestions;
-  if (skillLower.includes("web") || skillLower.includes("html") || skillLower.includes("css")) return webDevQuestions;
+  if (skillLower.includes("web") || skillLower.includes("html") || skillLower.includes("css") || skillLower.includes("javascript") || skillLower.includes("react") || skillLower.includes("node")) return webDevQuestions;
   if (skillLower.includes("cyber") || skillLower.includes("security")) return cybersecurityQuestions;
-  if (skillLower.includes("marketing")) return digitalMarketingQuestions;
-  if (skillLower.includes("data science")) return dataScienceQuestions;
-  if (skillLower.includes("machine learning") || skillLower.includes("ml")) return machineLearningQuestions;
-  if (skillLower.includes("design") || skillLower.includes("ui") || skillLower.includes("ux") || skillLower.includes("figma")) return graphicDesignQuestions;
+  if (skillLower.includes("marketing")) return marketingQuestions;
+  if (skillLower.includes("data science") || skillLower.includes("data-analysis") || skillLower.includes("statistics")) return dataScienceQuestions;
+  if (skillLower.includes("machine learning") || skillLower.includes("ml") || skillLower.includes("deep-learning")) return machineLearningQuestions;
+  if (skillLower.includes("design") || skillLower.includes("ui") || skillLower.includes("ux") || skillLower.includes("figma") || skillLower.includes("canva")) return graphicDesignQuestions;
   if (skillLower.includes("soft") || skillLower.includes("communication") || skillLower.includes("speaking")) return communicationSkillsQuestions;
-  if (skillLower.includes("canva")) return canvaQuestions;
-  if (skillLower.includes("color") || skillLower.includes("theory")) return colorTheoryQuestions;
+  if (skillLower.includes("hr") || skillLower.includes("recruitment") || skillLower.includes("talent")) return hrQuestions;
+  if (skillLower.includes("accounting") || skillLower.includes("financial") || skillLower.includes("tally") || skillLower.includes("excel")) return accountingPrinciplesQuestions;
   if (skillLower.includes("social")) return socialMediaMarketingQuestions;
-  if (skillLower.includes("accounting")) return accountingPrinciplesQuestions;
+  if (skillLower.includes("medical") || skillLower.includes("pharmacy") || skillLower.includes("neet") || skillLower.includes("gpat") || skillLower.includes("biology") || skillLower.includes("chemistry") || skillLower.includes("physics")) return dataScienceQuestions;
   
   // Generic fallback for unknown skills - generate generic questions about the skill
   return [
@@ -310,17 +366,7 @@ export default function MockTest() {
       const phaseNumber = parseInt(params.phaseId);
       
       // Save to localStorage using Storage utility
-      Storage.saveProgress(params.skillId, params.levelId, phaseNumber, {
-        completed: true,
-        testPassed: true,
-        score: pct,
-        completedAt: Date.now()
-      });
-      if (passed) {
-        Storage.saveProgress(params.skillId, params.levelId, phaseNumber + 1, {
-          unlocked: true
-        });
-      }
+      Storage.saveTestResult(params.skillId, params.levelId, phaseNumber, pct, passed);
 
       // Call complete-phase API to save to database and unlock next phase
       try {

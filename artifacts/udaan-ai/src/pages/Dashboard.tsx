@@ -41,6 +41,9 @@ export default function Dashboard() {
     },
   });
 
+  // Get overall progress from localStorage as fallback
+  const storageProgress = Storage.getOverallProgress();
+
   if (!student) {
     setLocation("/signup");
     return null;
@@ -69,11 +72,15 @@ export default function Dashboard() {
     ? Array.from(new Set([...(roadmapData.interests || []), ...(roadmapData.extraSkills || [])])).length
     : dashboard?.coursesEnrolled || 0;
 
+  // Use storage progress if dashboard data is not available
+  const phasesCompleted = storageProgress.phasesCompleted || dashboard?.coursesCompleted || 0;
+  const totalPoints = storageProgress.totalPoints || dashboard?.totalPoints || 0;
+
   const stats = [
     { label: "Courses Enrolled", value: skillsCount, color: "#7c3aed" },
-    { label: "Completed", value: dashboard?.coursesCompleted || 0, color: "#10b981" },
+    { label: "Completed", value: phasesCompleted, color: "#10b981" },
     { label: "Day Streak", value: dashboard?.streak || 0, color: "#f59e0b" },
-    { label: "Total Points", value: dashboard?.totalPoints || 0, color: "#06b6d4" },
+    { label: "Total Points", value: totalPoints, color: "#06b6d4" },
     { label: "Certificates", value: dashboard?.certificates || 0, color: "#ec4899" },
   ];
 

@@ -738,6 +738,185 @@ export const Q6_TIMELINE: QuestionData = {
   isFreeText: false,
 };
 
+// Common Q4: Work environment (for ALL paths after Q3)
+export const Q4_WORK_ENVIRONMENT: QuestionData = {
+  question: "What kind of work environment do you prefer?",
+  options: [
+    "🏢 Corporate/MNC",
+    "🚀 Startup",
+    "🏠 Work from home/Remote",
+    "💼 Freelancing/Own business",
+    "🤷 Open to anything",
+  ],
+  isFreeText: false,
+};
+
+// Common Q5: Daily time dedication (for ALL paths)
+export const Q5_DAILY_TIME_GENERAL: QuestionData = {
+  question: "How much time can you dedicate daily?",
+  options: [
+    "⏰ 30 minutes",
+    "⏰ 1 hour",
+    "⏰ 2 hours",
+    "⏰ 3+ hours",
+  ],
+  isFreeText: false,
+};
+
+// Common Q6: Timeline (for ALL paths)
+export const Q6_TIMELINE_GENERAL: QuestionData = {
+  question: "What's your target timeline to get job ready?",
+  options: [
+    "⚡ 3 months - very urgent",
+    "📅 6 months",
+    "🗓️ 1 year",
+    "📆 No rush, learning at my pace",
+  ],
+  isFreeText: false,
+};
+
+// Common Q7: Career fear (for ALL paths)
+export const Q7_CAREER_FEAR: QuestionData = {
+  question: "What's your biggest fear about your career?",
+  options: [
+    "😰 Not getting a good job",
+    "💰 Low salary",
+    "📚 Not having right skills",
+    "🏆 Too much competition",
+    "💪 None, I'm confident!",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q4 for BBA/BCom + HR path
+export const Q4_HR_AREA: QuestionData = {
+  question: "Which HR area interests you most?",
+  options: [
+    "👥 Recruitment & Talent Acquisition",
+    "📚 Learning & Development",
+    "💰 Compensation & Benefits",
+    "🤝 Employee Relations",
+    "📊 HR Analytics",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q4 for BBA/BCom + Marketing path
+export const Q4_MARKETING_AREA: QuestionData = {
+  question: "Which marketing area?",
+  options: [
+    "📱 Digital Marketing",
+    "📺 Brand Marketing",
+    "📊 Market Research",
+    "💰 Sales & Business Dev",
+    "🎯 Product Marketing",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q4 for BBA/BCom + Finance path
+export const Q4_FINANCE_AREA: QuestionData = {
+  question: "Which finance area?",
+  options: [
+    "📊 Financial Analysis",
+    "💹 Investment & Trading",
+    "🏦 Banking",
+    "📈 CA/Accounting",
+    "💻 Fintech",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q4 for Engineering + CS path
+export const Q4_ENGINEERING_COMPANY: QuestionData = {
+  question: "What type of company do you want?",
+  options: [
+    "🏢 Service (TCS/Infosys/Wipro)",
+    "🚀 Product (Google/Amazon/Flipkart)",
+    "💡 Startup",
+    "🌍 International/Remote",
+    "🤷 Best opportunity available",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q5 for Engineering + CS path
+export const Q5_ENGINEERING_TECH_SKILL: QuestionData = {
+  question: "Which tech area excites you most?",
+  options: [
+    "🌐 Web Development",
+    "📱 Mobile Apps",
+    "🤖 AI & Machine Learning",
+    "☁️ Cloud & DevOps",
+    "🔒 Cybersecurity",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q3 for BCA/BSc CS path (replaces Q4_BCA_FOCUS)
+export const Q3_BCA_FOCUS_NEW: QuestionData = {
+  question: "What's your main focus?",
+  options: [
+    "💼 Campus placement",
+    "🚀 Startup/Entrepreneurship",
+    "💻 Freelancing while studying",
+    "🎓 Higher studies after graduation",
+    "🤷 Still figuring out",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q4 for BCA/BSc CS path
+export const Q4_BCA_AREA: QuestionData = {
+  question: "Which area excites you most?",
+  options: [
+    "🌐 Web Development",
+    "📱 App Development",
+    "🤖 AI & Data Science",
+    "🔒 Cybersecurity",
+    "🎨 UI/UX Design",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q5 for BCA/BSc CS path
+export const Q5_BCA_TIME: QuestionData = {
+  question: "How much time daily for skill building?",
+  options: [
+    "⏰ 30 minutes",
+    "⏰ 1-2 hours",
+    "⏰ 3-4 hours",
+    "⏰ Full time focus",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q4 for Science PCB path - Medical direction
+export const Q4_PCB_MEDICAL_DIRECTION: QuestionData = {
+  question: "Which medical direction?",
+  options: [
+    "🏥 MBBS/Clinical Medicine",
+    "💊 Pharmacy/BPharm",
+    "🧬 Biotech/Research",
+    "👩‍⚕️ Nursing/Allied Health",
+    "💻 Health Tech/Bioinformatics",
+  ],
+  isFreeText: false,
+};
+
+// Specific Q5 for Science PCB path - Entrance exam
+export const Q5_PCB_ENTRANCE_EXAM: QuestionData = {
+  question: "What entrance exam are you preparing for?",
+  options: [
+    "📝 NEET (MBBS/BDS)",
+    "🏫 NEET (BAMS/Ayurvedic)",
+    "💊 GPAT (Pharmacy)",
+    "🔬 JAM (Research)",
+    "💻 JEE (Health Tech)",
+  ],
+  isFreeText: false,
+};
+
 // LAST QUESTION: Specific skills (free text)
 export const Q_SPECIFIC_SKILLS: QuestionData = {
   question: "Any specific skills you want to make sure are included in your roadmap?",
@@ -832,7 +1011,8 @@ export function getNextQuestion(history: AnswerHistory[]): QuestionData | null {
         if (q3.includes("cs") || q3.includes("it")) return Q4_CS_ENGINEERING_FOCUS;
         return Q4_NON_CS_ENGINEERING_GOAL;
       }
-      if (q2.includes("bca") || q2.includes("bsc")) return Q4_BCA_FOCUS;
+      if (q2.includes("bca") || q2.includes("bsc")) return Q3_BCA_FOCUS_NEW;
+      if (q2.includes("bba") || q2.includes("bcom")) return Q3_BUSINESS_AREA;
     } else if (q1.includes("graduation")) {
       if (q2.includes("engineering")) return Q4_ENGINEERING_NOW;
       if (q2.includes("business")) return Q4_BUSINESS_NEXT;
@@ -851,6 +1031,31 @@ export function getNextQuestion(history: AnswerHistory[]): QuestionData | null {
     // Handle "Other" field path - Q4_OTHER_GOAL answered
     if (q4.includes("goal") || q4.includes("job") || q4.includes("business") || q4.includes("learn") || q4.includes("change")) {
       return Q5_OTHER_INTEREST;
+    }
+
+    // BBA/BCom + HR path - show Q4_HR_AREA
+    if (q1.includes("college") && (q2.includes("bba") || q2.includes("bcom")) && q3.includes("hr")) {
+      return Q4_HR_AREA;
+    }
+
+    // BBA/BCom + Marketing path - show Q4_MARKETING_AREA
+    if (q1.includes("college") && (q2.includes("bba") || q2.includes("bcom")) && q3.includes("marketing")) {
+      return Q4_MARKETING_AREA;
+    }
+
+    // BBA/BCom + Finance path - show Q4_FINANCE_AREA
+    if (q1.includes("college") && (q2.includes("bba") || q2.includes("bcom")) && q3.includes("finance")) {
+      return Q4_FINANCE_AREA;
+    }
+
+    // Engineering CS path - show Q4_ENGINEERING_COMPANY
+    if (q1.includes("college") && q2.includes("engineering") && (q3.includes("cs") || q3.includes("it"))) {
+      return Q4_ENGINEERING_COMPANY;
+    }
+
+    // BCA/BSc CS path - show Q4_BCA_AREA after Q3_BCA_FOCUS_NEW
+    if (q1.includes("college") && (q2.includes("bca") || q2.includes("bsc"))) {
+      return Q4_BCA_AREA;
     }
 
     // Commerce + Maths + CA path - show Q5_CA_PREPARATION
@@ -893,6 +1098,36 @@ export function getNextQuestion(history: AnswerHistory[]): QuestionData | null {
     const q4 = answers[4].toLowerCase();
     const q5 = answers[5].toLowerCase();
 
+    // BBA/BCom + HR path - Q4_HR_AREA answered, show common Q4_WORK_ENVIRONMENT
+    if (q4.includes("hr") || q4.includes("recruitment") || q4.includes("learning") || q4.includes("compensation") || q4.includes("employee") || q4.includes("analytics")) {
+      return Q4_WORK_ENVIRONMENT;
+    }
+
+    // BBA/BCom + Marketing path - Q4_MARKETING_AREA answered, show common Q4_WORK_ENVIRONMENT
+    if (q4.includes("digital") || q4.includes("brand") || q4.includes("market research") || q4.includes("sales") || q4.includes("product")) {
+      return Q4_WORK_ENVIRONMENT;
+    }
+
+    // BBA/BCom + Finance path - Q4_FINANCE_AREA answered, show common Q4_WORK_ENVIRONMENT
+    if (q4.includes("financial") || q4.includes("investment") || q4.includes("banking") || q4.includes("ca") || q4.includes("fintech")) {
+      return Q4_WORK_ENVIRONMENT;
+    }
+
+    // Engineering CS path - Q4_ENGINEERING_COMPANY answered, show Q5_ENGINEERING_TECH_SKILL
+    if (q4.includes("service") || q4.includes("product") || q4.includes("startup") || q4.includes("international") || q4.includes("opportunity")) {
+      return Q5_ENGINEERING_TECH_SKILL;
+    }
+
+    // BCA/BSc CS path - Q4_BCA_AREA answered, show Q5_BCA_TIME
+    if (q4.includes("web") || q4.includes("app") || q4.includes("ai") || q4.includes("cybersecurity") || q4.includes("ui")) {
+      return Q5_BCA_TIME;
+    }
+
+    // Science PCB path - Q4_PCB_MEDICAL_DIRECTION answered, show Q5_PCB_ENTRANCE_EXAM
+    if (q4.includes("mbbs") || q4.includes("pharmacy") || q4.includes("biotech") || q4.includes("nursing") || q4.includes("health tech")) {
+      return Q5_PCB_ENTRANCE_EXAM;
+    }
+
     // Commerce + CA path - Q5_CA_PREPARATION answered, show Q6_CA_CHALLENGE
     if (q4.includes("ca") && (q5.includes("not yet") || q5.includes("self") || q5.includes("coaching") || q5.includes("registered"))) {
       return Q6_CA_CHALLENGE;
@@ -909,12 +1144,107 @@ export function getNextQuestion(history: AnswerHistory[]): QuestionData | null {
     }
   }
 
-  // Q6 answered - show Q7 for "Other" path
+  // Q6 answered - show Q7 for specific paths
   if (history.length === 7) {
+    const q5 = answers[5].toLowerCase();
     const q6 = answers[6].toLowerCase();
+
+    // BBA/BCom paths - Q4_WORK_ENVIRONMENT answered, show Q5_DAILY_TIME_GENERAL
+    if (q5.includes("corporate") || q5.includes("startup") || q5.includes("remote") || q5.includes("freelancing") || q5.includes("open")) {
+      return Q5_DAILY_TIME_GENERAL;
+    }
+
+    // Engineering CS path - Q5_ENGINEERING_TECH_SKILL answered, show Q4_WORK_ENVIRONMENT
+    if (q5.includes("web") || q5.includes("mobile") || q5.includes("ai") || q5.includes("cloud") || q5.includes("cybersecurity")) {
+      return Q4_WORK_ENVIRONMENT;
+    }
+
+    // BCA/BSc CS path - Q5_BCA_TIME answered, show Q4_WORK_ENVIRONMENT
+    if (q5.includes("30") || q5.includes("1-2") || q5.includes("3-4") || q5.includes("full")) {
+      return Q4_WORK_ENVIRONMENT;
+    }
 
     // Handle "Other" field path - Q6_OTHER_SKILL_LEVEL answered
     if (q6.includes("beginner") || q6.includes("basics") || q6.includes("intermediate") || q6.includes("advanced")) {
+      return Q_CHALLENGE;
+    }
+  }
+
+  // Q7 answered - show Q8 (common Q5_DAILY_TIME_GENERAL or Q6_TIMELINE_GENERAL)
+  if (history.length === 8) {
+    const q6 = answers[6].toLowerCase();
+    const q7 = answers[7].toLowerCase();
+
+    // BBA/BCom paths - Q5_DAILY_TIME_GENERAL answered, show Q6_TIMELINE_GENERAL
+    if (q6.includes("30") || q6.includes("1 hour") || q6.includes("2 hours") || q6.includes("3+")) {
+      return Q6_TIMELINE_GENERAL;
+    }
+
+    // Engineering CS path - Q4_WORK_ENVIRONMENT answered, show Q5_DAILY_TIME_GENERAL
+    if (q6.includes("corporate") || q6.includes("startup") || q6.includes("remote") || q6.includes("freelancing") || q6.includes("open")) {
+      return Q5_DAILY_TIME_GENERAL;
+    }
+
+    // BCA/BSc CS path - Q4_WORK_ENVIRONMENT answered, show Q5_DAILY_TIME_GENERAL
+    if (q6.includes("corporate") || q6.includes("startup") || q6.includes("remote") || q6.includes("freelancing") || q6.includes("open")) {
+      return Q5_DAILY_TIME_GENERAL;
+    }
+  }
+
+  // Q8 answered - show Q9 (common Q6_TIMELINE_GENERAL or Q7_CAREER_FEAR)
+  if (history.length === 9) {
+    const q7 = answers[7].toLowerCase();
+    const q8 = answers[8].toLowerCase();
+
+    // BBA/BCom paths - Q6_TIMELINE_GENERAL answered, show Q7_CAREER_FEAR
+    if (q7.includes("3 months") || q7.includes("6 months") || q7.includes("1 year") || q7.includes("no rush")) {
+      return Q7_CAREER_FEAR;
+    }
+
+    // Engineering CS path - Q5_DAILY_TIME_GENERAL answered, show Q6_TIMELINE_GENERAL
+    if (q7.includes("30") || q7.includes("1 hour") || q7.includes("2 hours") || q7.includes("3+")) {
+      return Q6_TIMELINE_GENERAL;
+    }
+
+    // BCA/BSc CS path - Q5_DAILY_TIME_GENERAL answered, show Q6_TIMELINE_GENERAL
+    if (q7.includes("30") || q7.includes("1 hour") || q7.includes("2 hours") || q7.includes("3+")) {
+      return Q6_TIMELINE_GENERAL;
+    }
+  }
+
+  // Q9 answered - show Q10 (common Q7_CAREER_FEAR or Q_CHALLENGE)
+  if (history.length === 10) {
+    const q8 = answers[8].toLowerCase();
+    const q9 = answers[9].toLowerCase();
+
+    // Engineering CS path - Q6_TIMELINE_GENERAL answered, show Q7_CAREER_FEAR
+    if (q8.includes("3 months") || q8.includes("6 months") || q8.includes("1 year") || q8.includes("no rush")) {
+      return Q7_CAREER_FEAR;
+    }
+
+    // BCA/BSc CS path - Q6_TIMELINE_GENERAL answered, show Q7_CAREER_FEAR
+    if (q8.includes("3 months") || q8.includes("6 months") || q8.includes("1 year") || q8.includes("no rush")) {
+      return Q7_CAREER_FEAR;
+    }
+
+    // BBA/BCom paths - Q7_CAREER_FEAR answered, show Q_CHALLENGE
+    if (q9.includes("not getting") || q9.includes("low salary") || q9.includes("not having") || q9.includes("competition") || q9.includes("confident")) {
+      return Q_CHALLENGE;
+    }
+  }
+
+  // Q10 answered - show Q_CHALLENGE for Engineering CS and BCA/BSc CS
+  if (history.length === 11) {
+    const q9 = answers[9].toLowerCase();
+    const q10 = answers[10].toLowerCase();
+
+    // Engineering CS path - Q7_CAREER_FEAR answered, show Q_CHALLENGE
+    if (q9.includes("not getting") || q9.includes("low salary") || q9.includes("not having") || q9.includes("competition") || q9.includes("confident")) {
+      return Q_CHALLENGE;
+    }
+
+    // BCA/BSc CS path - Q7_CAREER_FEAR answered, show Q_CHALLENGE
+    if (q9.includes("not getting") || q9.includes("low salary") || q9.includes("not having") || q9.includes("competition") || q9.includes("confident")) {
       return Q_CHALLENGE;
     }
   }
@@ -956,6 +1286,91 @@ export function getNextQuestion(history: AnswerHistory[]): QuestionData | null {
 export function mapSkillsFromConversation(history: AnswerHistory[]): string[] {
   const answers = history.map(h => h.answer).join(" ").toLowerCase();
   const allAnswers = history.map(h => h.answer);
+
+  // BBA + HR path
+  if ((answers.includes("bba") || answers.includes("bcom")) && answers.includes("hr")) {
+    return ["HR Fundamentals", "Recruitment Skills", "MS Excel for HR", "Communication Skills", "Labor Laws Basics", "HR Analytics", "Interview Techniques", "LinkedIn for HR"];
+  }
+
+  // BBA + Marketing path
+  if ((answers.includes("bba") || answers.includes("bcom")) && answers.includes("marketing")) {
+    return ["Marketing Fundamentals", "Digital Marketing", "Social Media Marketing", "Content Creation", "Canva", "Google Analytics", "SEO Basics"];
+  }
+
+  // BBA + Finance path
+  if ((answers.includes("bba") || answers.includes("bcom")) && answers.includes("finance")) {
+    return ["Financial Accounting", "MS Excel Advanced", "Financial Analysis", "Tally Prime", "Investment Basics", "Financial Modeling"];
+  }
+
+  // BBA + Business Management path
+  if ((answers.includes("bba") || answers.includes("bcom")) && (answers.includes("entrepreneurship") || answers.includes("business management"))) {
+    return ["Business Strategy", "Project Management", "MS Office Suite", "Communication Skills", "Business Analytics", "Leadership Skills", "Entrepreneurship Basics"];
+  }
+
+  // Engineering CS + Web Dev path
+  if (answers.includes("engineering") && (answers.includes("cs") || answers.includes("computer science")) && (answers.includes("web") || answers.includes("full stack"))) {
+    return ["HTML & CSS", "JavaScript", "React", "Node.js", "Database Basics", "Git", "DSA Basics", "System Design Basics"];
+  }
+
+  // Engineering CS + AI/ML path
+  if (answers.includes("engineering") && (answers.includes("cs") || answers.includes("computer science")) && (answers.includes("ai") || answers.includes("machine learning"))) {
+    return ["Python", "Statistics", "Data Analysis", "Machine Learning", "Deep Learning", "ML Projects", "Model Deployment"];
+  }
+
+  // Engineering CS + Mobile path
+  if (answers.includes("engineering") && (answers.includes("cs") || answers.includes("computer science")) && answers.includes("mobile")) {
+    return ["Flutter", "Dart", "UI Design Basics", "Firebase", "REST APIs", "App Deployment", "React Native Basics"];
+  }
+
+  // Engineering CS default (if no specific skill chosen)
+  if (answers.includes("engineering") && (answers.includes("cs") || answers.includes("computer science"))) {
+    return ["HTML & CSS", "JavaScript", "React", "Node.js", "Database Basics", "Git", "DSA Basics", "System Design Basics"];
+  }
+
+  // BCA/BSc CS + Web Dev path
+  if ((answers.includes("bca") || answers.includes("bsc")) && answers.includes("computer science") && answers.includes("web")) {
+    return ["HTML & CSS", "JavaScript", "React", "PHP or Node.js", "MySQL", "Git", "Portfolio Building"];
+  }
+
+  // BCA/BSc CS default
+  if ((answers.includes("bca") || answers.includes("bsc")) && answers.includes("computer science")) {
+    return ["HTML & CSS", "JavaScript", "React", "PHP or Node.js", "MySQL", "Git", "Portfolio Building"];
+  }
+
+  // Arts + Journalism + Video path
+  if (answers.includes("arts") && answers.includes("journalism") && answers.includes("video")) {
+    return ["Video Shooting Basics", "Premiere Pro", "After Effects Basics", "YouTube SEO", "Content Strategy", "Storytelling", "Social Media Growth", "Monetization"];
+  }
+
+  // Commerce + CA path
+  if (answers.includes("commerce") && answers.includes("ca")) {
+    return ["Accounting Principles", "Taxation", "Financial Statements", "Tally Prime", "Business Laws", "CA Foundation Prep", "MS Excel Advanced", "Audit Basics"];
+  }
+
+  // Science + PCM + Data Science path
+  if (answers.includes("pcm") && answers.includes("data")) {
+    return ["Python", "Statistics & Probability", "Pandas & NumPy", "Data Visualization", "SQL", "Machine Learning", "Data Science Projects"];
+  }
+
+  // Science + PCB + MBBS/NEET path
+  if (answers.includes("pcb") && (answers.includes("medical") || answers.includes("mbbs") || answers.includes("neet"))) {
+    return ["Biology Advanced", "Chemistry Advanced", "Physics for NEET", "NEET Mock Tests", "Medical Terminology", "Anatomy Basics", "Study Techniques", "Previous Year Papers"];
+  }
+
+  // Science + PCB + Pharmacy path
+  if (answers.includes("pcb") && (answers.includes("pharmacy") || answers.includes("bpharm") || answers.includes("gpat"))) {
+    return ["Pharmaceutical Chemistry", "Pharmacology", "GPAT Preparation", "Drug Regulations", "Clinical Pharmacy Basics"];
+  }
+
+  // Science + PCB + Health Tech path
+  if (answers.includes("pcb") && answers.includes("health tech")) {
+    return ["Python Basics", "Healthcare Data", "Bioinformatics", "Medical Terminology", "Excel for Healthcare", "Research Methods"];
+  }
+
+  // Working Professional + Career Change to Tech
+  if (answers.includes("working") && answers.includes("career change") && answers.includes("tech")) {
+    return ["Programming Fundamentals", "Python", "Web Dev Basics", "One Specialization", "Portfolio Projects", "LinkedIn Optimization", "Interview Preparation", "Resume Building"];
+  }
 
   // Arts/Humanities + Get Job
   if (answers.includes("arts") && answers.includes("humanities") && answers.includes("job")) {
@@ -1012,24 +1427,9 @@ export function mapSkillsFromConversation(history: AnswerHistory[]): string[] {
     return ["Python", "Data Structures", "Web Development", "System Design", "Git & GitHub", "Interview Prep"];
   }
 
-  // PCM + Data Science
-  if (answers.includes("pcm") && answers.includes("data")) {
-    return ["Python", "Statistics & Maths", "Pandas & NumPy", "Data Visualization", "Machine Learning", "SQL"];
-  }
-
-  // PCB + Health Tech
-  if (answers.includes("pcb") && answers.includes("health tech")) {
-    return ["Python Basics", "Bioinformatics Basics", "Healthcare Data", "Excel for Healthcare", "Medical Terminology", "Research Methods"];
-  }
-
   // PCB + Medical
   if (answers.includes("pcb") && answers.includes("medical")) {
     return ["Biology Advanced", "Chemistry Advanced", "Physics for NEET", "NEET Mock Tests", "Medical Terminology", "Study Techniques"];
-  }
-
-  // Commerce + Maths + CA
-  if (answers.includes("commerce") && answers.includes("math") && answers.includes("ca")) {
-    return ["Accounting Principles", "Taxation Basics", "Financial Statements", "Tally/Excel", "Business Laws", "CA Foundation Prep"];
   }
 
   // Commerce + Maths + Stock Market
@@ -1057,29 +1457,14 @@ export function mapSkillsFromConversation(history: AnswerHistory[]): string[] {
     return ["User Research Methods", "Usability Testing", "Survey Design", "Data Analysis Basics", "Figma Basics", "UX Writing"];
   }
 
-  // Engineering CS + Get Placed
-  if (answers.includes("engineering") && answers.includes("computer science") && answers.includes("placed")) {
-    return ["DSA", "System Design", "Web Development", "Python/Java", "Git", "Interview Preparation", "Mock Interviews", "Resume Building"];
-  }
-
   // Engineering Non-CS + Switch to Tech
   if (answers.includes("engineering") && answers.includes("switch") && answers.includes("tech")) {
     return ["Programming Basics", "Python", "Web Development Basics", "Data Science Intro", "Git", "One Specialization of choice"];
   }
 
-  // BBA + Digital Marketing
-  if (answers.includes("bba") && answers.includes("digital marketing")) {
-    return ["Social Media Strategy", "Content Creation", "SEO", "Performance Marketing", "Analytics", "Brand Management"];
-  }
-
   // Working Professional IT + AI/ML
   if (answers.includes("working") && answers.includes("it") && (answers.includes("ai") || answers.includes("ml"))) {
     return ["Python Advanced", "Machine Learning", "Deep Learning", "NLP", "MLOps", "AI Project Building"];
-  }
-
-  // Working Professional + Career Change to Tech
-  if (answers.includes("working") && answers.includes("career change") && answers.includes("tech")) {
-    return ["Programming Fundamentals", "Web Development", "Python", "One Specialization", "Portfolio Projects", "Interview Prep"];
   }
 
   // Homemaker + Restart Career

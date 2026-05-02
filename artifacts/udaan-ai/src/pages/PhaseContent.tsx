@@ -82,6 +82,12 @@ export default function PhaseContent() {
   // Get skill-specific phase content based on URL parameters
   const parsedPhaseId = parseInt(phaseId || "1");
   const validPhaseId = isNaN(parsedPhaseId) ? 1 : parsedPhaseId;
+  
+  // Debug: Log skillId from URL
+  console.log('Skill ID from URL:', skillId);
+  console.log('Level ID from URL:', levelId);
+  console.log('Phase ID from URL:', phaseId);
+  
   const initialPhaseData = getPhaseContent(
     skillId || "Python",
     levelId || "Beginner",
@@ -138,6 +144,9 @@ export default function PhaseContent() {
         completed: true,
         completedAt: Date.now()
       });
+      
+      // Also mark phase as complete using the dedicated method
+      Storage.savePhaseComplete(skillId, levelId, validPhaseId, totalProgress);
     }
 
     setPhaseComplete(true);

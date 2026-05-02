@@ -689,6 +689,749 @@ export const SKILL_VIDEO_MAPPING: Record<string, SkillVideos> = {
       { id: "2", description: "Practice mock interview with a friend", completed: false },
     ],
   },
+
+  // HR Skills
+  "hr-fundamentals": {
+    skillName: "HR Fundamentals",
+    levelName: "Beginner",
+    phaseName: "HR Fundamentals",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "HR Fundamentals Full Course", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Human Resource Management Basics", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "HR Roles and Responsibilities", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Understand key HR functions", completed: false },
+      { id: "2", description: "Research HR department structure of a company", completed: false },
+    ],
+  },
+
+  "recruitment-skills": {
+    skillName: "Recruitment Skills",
+    levelName: "Beginner",
+    phaseName: "Recruitment Skills",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Recruitment and Selection Process", duration: "15:20", youtubeId: "KIwVQ5XLKVA", watched: false },
+      { id: "2", title: "How to Interview Candidates", duration: "16:45", youtubeId: "1mHjMNZZvFo", watched: false },
+      { id: "3", title: "Sourcing and Screening", duration: "14:30", youtubeId: "PCWVi5pAa30", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice conducting a mock interview", completed: false },
+      { id: "2", description: "Create a job description template", completed: false },
+    ],
+  },
+
+  "ms-excel-for-hr": {
+    skillName: "MS Excel for HR",
+    levelName: "Beginner",
+    phaseName: "MS Excel for HR",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Excel for HR Professionals", duration: "15:20", youtubeId: "PSNXoAs2FtQ", watched: false },
+      { id: "2", title: "HR Data Analysis in Excel", duration: "16:45", youtubeId: "K74_FNnlIF8", watched: false },
+      { id: "3", title: "Excel Formulas for HR", duration: "14:30", youtubeId: "S-qlL8tDMuQ", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Create an employee database in Excel", completed: false },
+      { id: "2", description: "Use Excel formulas for HR calculations", completed: false },
+    ],
+  },
+
+  "labor-laws-basics": {
+    skillName: "Labor Laws Basics",
+    levelName: "Beginner",
+    phaseName: "Labor Laws Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Indian Labor Laws Overview", duration: "15:20", youtubeId: "dlYUAcwMY9g", watched: false },
+      { id: "2", title: "Employee Rights and Laws", duration: "16:45", youtubeId: "VvqsEEB9Zj4", watched: false },
+      { id: "3", title: "Compliance for HR", duration: "14:30", youtubeId: "4J3Gi1IhbXU", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Research key labor laws in India", completed: false },
+      { id: "2", description: "Understand employee compliance requirements", completed: false },
+    ],
+  },
+
+  "hr-analytics": {
+    skillName: "HR Analytics",
+    levelName: "Beginner",
+    phaseName: "HR Analytics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "HR Analytics Introduction", duration: "15:20", youtubeId: "PSNXoAs2FtQ", watched: false },
+      { id: "2", title: "Data-Driven HR Decisions", duration: "16:45", youtubeId: "K74_FNnlIF8", watched: false },
+      { id: "3", title: "HR Metrics and KPIs", duration: "14:30", youtubeId: "xxpc-HPKN28", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Identify key HR metrics", completed: false },
+      { id: "2", description: "Create a simple HR dashboard in Excel", completed: false },
+    ],
+  },
+
+  "interview-techniques": {
+    skillName: "Interview Techniques",
+    levelName: "Beginner",
+    phaseName: "Interview Techniques",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Interview Techniques for HR", duration: "15:20", youtubeId: "KIwVQ5XLKVA", watched: false },
+      { id: "2", title: "Behavioral Interview Questions", duration: "16:45", youtubeId: "1mHjMNZZvFo", watched: false },
+      { id: "3", title: "Structured Interview Process", duration: "14:30", youtubeId: "PCWVi5pAa30", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice structured interview techniques", completed: false },
+      { id: "2", description: "Create an interview evaluation form", completed: false },
+    ],
+  },
+
+  "linkedin-for-hr": {
+    skillName: "LinkedIn for HR",
+    levelName: "Beginner",
+    phaseName: "LinkedIn for HR",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "LinkedIn Recruiting Guide", duration: "15:20", youtubeId: "BcfGWi8ATCs", watched: false },
+      { id: "2", title: "Sourcing Candidates on LinkedIn", duration: "16:45", youtubeId: "Tt08KmFfIYQ", watched: false },
+      { id: "3", title: "LinkedIn for HR Branding", duration: "14:30", youtubeId: "y8YH0Qbu5h4", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Optimize LinkedIn profile for HR", completed: false },
+      { id: "2", description: "Practice candidate sourcing on LinkedIn", completed: false },
+    ],
+  },
+
+  // Marketing Skills
+  "marketing-fundamentals": {
+    skillName: "Marketing Fundamentals",
+    levelName: "Beginner",
+    phaseName: "Marketing Fundamentals",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Marketing Fundamentals Full Course", duration: "15:20", youtubeId: "nU-IIXBWlS4", watched: false },
+      { id: "2", title: "Marketing Mix 4Ps", duration: "16:45", youtubeId: "q9gag_dJubQ", watched: false },
+      { id: "3", title: "Brand Management Basics", duration: "14:30", youtubeId: "xsVTqzratPs", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Analyze marketing strategy of a brand", completed: false },
+      { id: "2", description: "Create a marketing mix for a product", completed: false },
+    ],
+  },
+
+  "google-analytics": {
+    skillName: "Google Analytics",
+    levelName: "Beginner",
+    phaseName: "Google Analytics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Google Analytics Tutorial", duration: "15:20", youtubeId: "lD3PzWBJ7k4", watched: false },
+      { id: "2", title: "GA4 for Beginners", duration: "16:45", youtubeId: "xsVTqzratPs", watched: false },
+      { id: "3", title: "Analytics for Marketing", duration: "14:30", youtubeId: "nU-IIXBWlS4", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Set up Google Analytics account", completed: false },
+      { id: "2", description: "Analyze website traffic data", completed: false },
+    ],
+  },
+
+  "seo-basics": {
+    skillName: "SEO Basics",
+    levelName: "Beginner",
+    phaseName: "SEO Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "SEO Tutorial for Beginners", duration: "15:20", youtubeId: "xsVTqzratPs", watched: false },
+      { id: "2", title: "On-Page SEO", duration: "16:45", youtubeId: "lD3PzWBJ7k4", watched: false },
+      { id: "3", title: "Keyword Research", duration: "14:30", youtubeId: "nU-IIXBWlS4", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Perform keyword research for a topic", completed: false },
+      { id: "2", description: "Optimize a webpage for SEO", completed: false },
+    ],
+  },
+
+  // Finance Skills
+  "financial-accounting": {
+    skillName: "Financial Accounting",
+    levelName: "Beginner",
+    phaseName: "Financial Accounting",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Financial Accounting Full Course", duration: "15:20", youtubeId: "yYX4bvQSqbo", watched: false },
+      { id: "2", title: "Accounting Principles", duration: "16:45", youtubeId: "uI4i_a0gOYE", watched: false },
+      { id: "3", title: "Financial Statements", duration: "14:30", youtubeId: "4J3Gi1IhbXU", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice basic accounting entries", completed: false },
+      { id: "2", description: "Create a simple balance sheet", completed: false },
+    ],
+  },
+
+  "ms-excel-advanced": {
+    skillName: "MS Excel Advanced",
+    levelName: "Beginner",
+    phaseName: "MS Excel Advanced",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Advanced Excel Tutorial", duration: "15:20", youtubeId: "K74_FNnlIF8", watched: false },
+      { id: "2", title: "Excel Formulas and Functions", duration: "16:45", youtubeId: "PSNXoAs2FtQ", watched: false },
+      { id: "3", title: "Pivot Tables in Excel", duration: "14:30", youtubeId: "S-qlL8tDMuQ", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice advanced Excel formulas", completed: false },
+      { id: "2", description: "Create pivot tables for data analysis", completed: false },
+    ],
+  },
+
+  "financial-analysis": {
+    skillName: "Financial Analysis",
+    levelName: "Beginner",
+    phaseName: "Financial Analysis",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Financial Analysis Tutorial", duration: "15:20", youtubeId: "uI4i_a0gOYE", watched: false },
+      { id: "2", title: "Ratio Analysis", duration: "16:45", youtubeId: "nIMklDa_8MQ", watched: false },
+      { id: "3", title: "Excel for Financial Analysis", duration: "14:30", youtubeId: "PSNXoAs2FtQ", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Perform ratio analysis on financial statements", completed: false },
+      { id: "2", description: "Create a financial analysis report", completed: false },
+    ],
+  },
+
+  "tally-prime": {
+    skillName: "Tally Prime",
+    levelName: "Beginner",
+    phaseName: "Tally Prime",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Tally Prime Full Course", duration: "15:20", youtubeId: "bqbI4h-bCEg", watched: false },
+      { id: "2", title: "Tally for Accounting", duration: "16:45", youtubeId: "4J3Gi1IhbXU", watched: false },
+      { id: "3", title: "Tally GST Tutorial", duration: "14:30", youtubeId: "2Q-R2gNkm48", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Create a company in Tally Prime", completed: false },
+      { id: "2", description: "Record transactions in Tally", completed: false },
+    ],
+  },
+
+  "investment-basics": {
+    skillName: "Investment Basics",
+    levelName: "Beginner",
+    phaseName: "Investment Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Investment Basics for Beginners", duration: "15:20", youtubeId: "uI4i_a0gOYE", watched: false },
+      { id: "2", title: "Stock Market Basics", duration: "16:45", youtubeId: "nIMklDa_8MQ", watched: false },
+      { id: "3", title: "Mutual Funds Explained", duration: "14:30", youtubeId: "4J3Gi1IhbXU", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Research different investment options", completed: false },
+      { id: "2", description: "Create a simple investment plan", completed: false },
+    ],
+  },
+
+  "financial-modeling": {
+    skillName: "Financial Modeling",
+    levelName: "Beginner",
+    phaseName: "Financial Modeling",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Financial Modeling Tutorial", duration: "15:20", youtubeId: "K74_FNnlIF8", watched: false },
+      { id: "2", title: "Excel for Financial Modeling", duration: "16:45", youtubeId: "PSNXoAs2FtQ", watched: false },
+      { id: "3", title: "Building Financial Models", duration: "14:30", youtubeId: "uI4i_a0gOYE", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Build a simple financial model in Excel", completed: false },
+      { id: "2", description: "Create a projection model", completed: false },
+    ],
+  },
+
+  // Web Development Skills
+  "html-css": {
+    skillName: "HTML & CSS",
+    levelName: "Beginner",
+    phaseName: "HTML & CSS",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "HTML Full Course", duration: "15:20", youtubeId: "pQN-pnXPaVg", watched: false },
+      { id: "2", title: "CSS Tutorial", duration: "16:45", youtubeId: "1Rs2ND1ryYc", watched: false },
+      { id: "3", title: "Responsive Web Design", duration: "14:30", youtubeId: "W6NZfCO5SIk", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Build your first HTML page", completed: false },
+      { id: "2", description: "Style a webpage with CSS", completed: false },
+    ],
+  },
+
+  "javascript": {
+    skillName: "JavaScript",
+    levelName: "Beginner",
+    phaseName: "JavaScript",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "JavaScript Full Course", duration: "15:20", youtubeId: "W6NZfCO5SIk", watched: false },
+      { id: "2", title: "JavaScript Basics", duration: "16:45", youtubeId: "PkZNo7MFNFg", watched: false },
+      { id: "3", title: "DOM Manipulation", duration: "14:30", youtubeId: "W6NZfCO5SIk", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Write JavaScript functions", completed: false },
+      { id: "2", description: "Manipulate DOM elements", completed: false },
+    ],
+  },
+
+  "react": {
+    skillName: "React",
+    levelName: "Beginner",
+    phaseName: "React",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "React Tutorial for Beginners", duration: "15:20", youtubeId: "w7ejDZ8SWv8", watched: false },
+      { id: "2", title: "React Hooks Explained", duration: "16:45", youtubeId: "T8EZZXSnYBk", watched: false },
+      { id: "3", title: "Building React Apps", duration: "14:30", youtubeId: "SqcY0GlETPk", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Create a simple React component", completed: false },
+      { id: "2", description: "Build a React app with hooks", completed: false },
+    ],
+  },
+
+  "node-js": {
+    skillName: "Node.js",
+    levelName: "Beginner",
+    phaseName: "Node.js",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Node.js Tutorial for Beginners", duration: "15:20", youtubeId: "Oe421EPjeBE", watched: false },
+      { id: "2", title: "Express.js Basics", duration: "16:45", youtubeId: "L72fhGm1tfE", watched: false },
+      { id: "3", title: "Building APIs with Node", duration: "14:30", youtubeId: "Oe421EPjeBE", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Create a simple Node.js server", completed: false },
+      { id: "2", description: "Build a REST API with Express", completed: false },
+    ],
+  },
+
+  "database-basics": {
+    skillName: "Database Basics",
+    levelName: "Beginner",
+    phaseName: "Database Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Database Tutorial for Beginners", duration: "15:20", youtubeId: "HXV3zeQKqyg", watched: false },
+      { id: "2", title: "SQL Basics", duration: "16:45", youtubeId: "7sT4LB3c34A", watched: false },
+      { id: "3", title: "MySQL Tutorial", duration: "14:30", youtubeId: "7S_tPM1JhcI", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Create a simple database schema", completed: false },
+      { id: "2", description: "Write SQL queries", completed: false },
+    ],
+  },
+
+  "git": {
+    skillName: "Git",
+    levelName: "Beginner",
+    phaseName: "Git",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Git Tutorial for Beginners", duration: "15:20", youtubeId: "RGOj5yH7evk", watched: false },
+      { id: "2", title: "GitHub Tutorial", duration: "16:45", youtubeId: "fJ9I_uP9lZo", watched: false },
+      { id: "3", title: "Git Commands Explained", duration: "14:30", youtubeId: "RGOj5yH7evk", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Initialize a Git repository", completed: false },
+      { id: "2", description: "Push code to GitHub", completed: false },
+    ],
+  },
+
+  "dsa-basics": {
+    skillName: "DSA Basics",
+    levelName: "Beginner",
+    phaseName: "DSA Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Data Structures Tutorial", duration: "15:20", youtubeId: "B9PLqFc9xqk", watched: false },
+      { id: "2", title: "Algorithms Explained", duration: "16:45", youtubeId: "pI0jQsQmQkA", watched: false },
+      { id: "3", title: "DSA for Interviews", duration: "14:30", youtubeId: "B9PLqFc9xqk", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Implement basic data structures", completed: false },
+      { id: "2", description: "Solve simple algorithm problems", completed: false },
+    ],
+  },
+
+  "system-design-basics": {
+    skillName: "System Design Basics",
+    levelName: "Beginner",
+    phaseName: "System Design Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "System Design Tutorial", duration: "15:20", youtubeId: "xRSdKn4KvqY", watched: false },
+      { id: "2", title: "Scalability Explained", duration: "16:45", youtubeId: "pI0jQsQmQkA", watched: false },
+      { id: "3", title: "Database Design", duration: "14:30", youtubeId: "HXV3zeQKqyg", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Design a simple system architecture", completed: false },
+      { id: "2", description: "Create a database schema", completed: false },
+    ],
+  },
+
+  // AI/ML Skills
+  "statistics": {
+    skillName: "Statistics",
+    levelName: "Beginner",
+    phaseName: "Statistics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Statistics for Data Science", duration: "15:20", youtubeId: "xxpc-HPKN28", watched: false },
+      { id: "2", title: "Probability Basics", duration: "16:45", youtubeId: "ua-CiDNNj30", watched: false },
+      { id: "3", title: "Statistical Analysis", duration: "14:30", youtubeId: "PSNXoAs2FtQ", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice basic statistical calculations", completed: false },
+      { id: "2", description: "Analyze a dataset using statistics", completed: false },
+    ],
+  },
+
+  "data-analysis": {
+    skillName: "Data Analysis",
+    levelName: "Beginner",
+    phaseName: "Data Analysis",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Data Analysis Tutorial", duration: "15:20", youtubeId: "ua-CiDNNj30", watched: false },
+      { id: "2", title: "Python for Data Analysis", duration: "16:45", youtubeId: "kqtD5dpn9C8", watched: false },
+      { id: "3", title: "Excel for Data Analysis", duration: "14:30", youtubeId: "PSNXoAs2FtQ", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Analyze a sample dataset", completed: false },
+      { id: "2", description: "Create data visualizations", completed: false },
+    ],
+  },
+
+  "deep-learning": {
+    skillName: "Deep Learning",
+    levelName: "Beginner",
+    phaseName: "Deep Learning",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Deep Learning Tutorial", duration: "15:20", youtubeId: "NWONeJKn6kc", watched: false },
+      { id: "2", title: "Neural Networks Explained", duration: "16:45", youtubeId: "OGxgnH8y2NM", watched: false },
+      { id: "3", title: "TensorFlow for Beginners", duration: "14:30", youtubeId: "7eh4d6sabA0", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Build a simple neural network", completed: false },
+      { id: "2", description: "Train a model on sample data", completed: false },
+    ],
+  },
+
+  "ml-projects": {
+    skillName: "ML Projects",
+    levelName: "Beginner",
+    phaseName: "ML Projects",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "ML Project Ideas", duration: "15:20", youtubeId: "NWONeJKn6kc", watched: false },
+      { id: "2", title: "Building ML Projects", duration: "16:45", youtubeId: "OGxgnH8y2NM", watched: false },
+      { id: "3", title: "End-to-End ML Project", duration: "14:30", youtubeId: "7eh4d6sabA0", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Complete a simple ML project", completed: false },
+      { id: "2", description: "Deploy a model", completed: false },
+    ],
+  },
+
+  "model-deployment": {
+    skillName: "Model Deployment",
+    levelName: "Beginner",
+    phaseName: "Model Deployment",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Model Deployment Tutorial", duration: "15:20", youtubeId: "7eh4d6sabA0", watched: false },
+      { id: "2", title: "MLOps Basics", duration: "16:45", youtubeId: "NWONeJKn6kc", watched: false },
+      { id: "3", title: "Deploying ML Models", duration: "14:30", youtubeId: "OGxgnH8y2NM", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Deploy a simple model", completed: false },
+      { id: "2", description: "Set up a model API", completed: false },
+    ],
+  },
+
+  // Medical/Pharmacy Skills
+  "biology-advanced": {
+    skillName: "Biology Advanced",
+    levelName: "Beginner",
+    phaseName: "Biology Advanced",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Biology for NEET", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Cell Biology", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Human Physiology", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Study cell biology concepts", completed: false },
+      { id: "2", description: "Practice NEET biology questions", completed: false },
+    ],
+  },
+
+  "chemistry-advanced": {
+    skillName: "Chemistry Advanced",
+    levelName: "Beginner",
+    phaseName: "Chemistry Advanced",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Chemistry for NEET", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Organic Chemistry", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Physical Chemistry", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Study organic chemistry reactions", completed: false },
+      { id: "2", description: "Practice NEET chemistry questions", completed: false },
+    ],
+  },
+
+  "physics-for-neet": {
+    skillName: "Physics for NEET",
+    levelName: "Beginner",
+    phaseName: "Physics for NEET",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Physics for NEET", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Mechanics", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Thermodynamics", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Solve physics numerical problems", completed: false },
+      { id: "2", description: "Practice NEET physics questions", completed: false },
+    ],
+  },
+
+  "neet-mock-tests": {
+    skillName: "NEET Mock Tests",
+    levelName: "Beginner",
+    phaseName: "NEET Mock Tests",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "NEET Preparation Strategy", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Solving NEET Papers", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Time Management for NEET", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Take a NEET mock test", completed: false },
+      { id: "2", description: "Analyze mock test performance", completed: false },
+    ],
+  },
+
+  "medical-terminology": {
+    skillName: "Medical Terminology",
+    levelName: "Beginner",
+    phaseName: "Medical Terminology",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Medical Terminology Basics", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Common Medical Terms", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Anatomy Terminology", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Learn common medical prefixes", completed: false },
+      { id: "2", description: "Practice medical terminology", completed: false },
+    ],
+  },
+
+  "anatomy-basics": {
+    skillName: "Anatomy Basics",
+    levelName: "Beginner",
+    phaseName: "Anatomy Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Human Anatomy Basics", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Skeletal System", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Organ Systems", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Study human body systems", completed: false },
+      { id: "2", description: "Label anatomical structures", completed: false },
+    ],
+  },
+
+  "study-techniques": {
+    skillName: "Study Techniques",
+    levelName: "Beginner",
+    phaseName: "Study Techniques",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Effective Study Techniques", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Memory Techniques", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Time Management for Students", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice active recall", completed: false },
+      { id: "2", description: "Create a study schedule", completed: false },
+    ],
+  },
+
+  "pharmaceutical-chemistry": {
+    skillName: "Pharmaceutical Chemistry",
+    levelName: "Beginner",
+    phaseName: "Pharmaceutical Chemistry",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Pharmaceutical Chemistry Basics", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Drug Chemistry", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Medicinal Chemistry", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Study drug structures", completed: false },
+      { id: "2", description: "Practice pharmaceutical chemistry problems", completed: false },
+    ],
+  },
+
+  "pharmacology": {
+    skillName: "Pharmacology",
+    levelName: "Beginner",
+    phaseName: "Pharmacology",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Pharmacology Basics", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Drug Actions", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Clinical Pharmacology", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Study drug mechanisms", completed: false },
+      { id: "2", description: "Practice pharmacology questions", completed: false },
+    ],
+  },
+
+  "gpat-preparation": {
+    skillName: "GPAT Preparation",
+    levelName: "Beginner",
+    phaseName: "GPAT Preparation",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "GPAT Preparation Strategy", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "GPAT Mock Tests", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "GPAT Syllabus Coverage", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Take a GPAT mock test", completed: false },
+      { id: "2", description: "Analyze GPAT preparation", completed: false },
+    ],
+  },
+
+  "drug-regulations": {
+    skillName: "Drug Regulations",
+    levelName: "Beginner",
+    phaseName: "Drug Regulations",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Drug Regulations in India", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "FDA Guidelines", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Pharmacy Law", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Study drug approval process", completed: false },
+      { id: "2", description: "Understand pharmacy regulations", completed: false },
+    ],
+  },
+
+  "clinical-pharmacy-basics": {
+    skillName: "Clinical Pharmacy Basics",
+    levelName: "Beginner",
+    phaseName: "Clinical Pharmacy Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Clinical Pharmacy Basics", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Patient Counseling", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Clinical Practice", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Practice patient counseling scenarios", completed: false },
+      { id: "2", description: "Study clinical pharmacy cases", completed: false },
+    ],
+  },
+
+  // Health Tech Skills
+  "python-basics": {
+    skillName: "Python Basics",
+    levelName: "Beginner",
+    phaseName: "Python Basics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Python for Beginners", duration: "15:20", youtubeId: "kqtD5dpn9C8", watched: false },
+      { id: "2", title: "Python Basics", duration: "16:45", youtubeId: "cQT33yu9pY8", watched: false },
+      { id: "3", title: "Python Control Flow", duration: "14:30", youtubeId: "DZwmZ8Usvnk", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Write Python programs", completed: false },
+      { id: "2", description: "Practice Python syntax", completed: false },
+    ],
+  },
+
+  "healthcare-data": {
+    skillName: "Healthcare Data",
+    levelName: "Beginner",
+    phaseName: "Healthcare Data",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Healthcare Data Analytics", duration: "15:20", youtubeId: "PSNXoAs2FtQ", watched: false },
+      { id: "2", title: "Medical Data Management", duration: "16:45", youtubeId: "K74_FNnlIF8", watched: false },
+      { id: "3", title: "Health Informatics", duration: "14:30", youtubeId: "xxpc-HPKN28", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Analyze healthcare datasets", completed: false },
+      { id: "2", description: "Practice medical data management", completed: false },
+    ],
+  },
+
+  "bioinformatics": {
+    skillName: "Bioinformatics",
+    levelName: "Beginner",
+    phaseName: "Bioinformatics",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Bioinformatics Basics", duration: "15:20", youtubeId: "kqtD5dpn9C8", watched: false },
+      { id: "2", title: "Computational Biology", duration: "16:45", youtubeId: "ua-CiDNNj30", watched: false },
+      { id: "3", title: "Bioinformatics Tools", duration: "14:30", youtubeId: "xxpc-HPKN28", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Use bioinformatics tools", completed: false },
+      { id: "2", "description": "Analyze biological data", completed: false },
+    ],
+  },
+
+  "excel-for-healthcare": {
+    skillName: "Excel for Healthcare",
+    levelName: "Beginner",
+    phaseName: "Excel for Healthcare",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Excel for Healthcare Professionals", duration: "15:20", youtubeId: "PSNXoAs2FtQ", watched: false },
+      { id: "2", title: "Healthcare Data in Excel", duration: "16:45", youtubeId: "K74_FNnlIF8", watched: false },
+      { id: "3", title: "Medical Records Management", duration: "14:30", youtubeId: "S-qlL8tDMuQ", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Create healthcare data spreadsheets", completed: false },
+      { id: "2", description: "Manage medical records in Excel", completed: false },
+    ],
+  },
+
+  "research-methods": {
+    skillName: "Research Methods",
+    levelName: "Beginner",
+    phaseName: "Research Methods",
+    phaseNumber: 1,
+    videos: [
+      { id: "1", title: "Research Methods Basics", duration: "15:20", youtubeId: "HAnw168huqA", watched: false },
+      { id: "2", title: "Scientific Research", duration: "16:45", youtubeId: "tShavGuo0_E", watched: false },
+      { id: "3", title: "Data Collection Methods", duration: "14:30", youtubeId: "H0_yKBitO8M", watched: false },
+    ],
+    exercises: [
+      { id: "1", description: "Design a research study", completed: false },
+      { id: "2", description: "Practice data collection methods", completed: false },
+    ],
+  },
 };
 
 // Function to get videos for a skill
@@ -696,13 +1439,21 @@ export function getVideosForSkill(skillName: string, level: string = "Beginner",
   // Normalize skill name for matching - convert to lowercase and replace spaces with hyphens
   const normalizedSkill = skillName.trim().toLowerCase().replace(/\s+/g, '-');
   
+  // Debug logging
+  console.log('getVideosForSkill - Input skillName:', skillName);
+  console.log('getVideosForSkill - Normalized skill:', normalizedSkill);
+  console.log('getVideosForSkill - Available keys:', Object.keys(SKILL_VIDEO_MAPPING));
+  
   // Try to find exact match with hyphens
   const exactMatch = Object.keys(SKILL_VIDEO_MAPPING).find(
     key => key.toLowerCase().replace(/\s+/g, '-') === normalizedSkill
   );
   
+  console.log('getVideosForSkill - Exact match:', exactMatch);
+  
   if (exactMatch) {
     const mapping = SKILL_VIDEO_MAPPING[exactMatch];
+    console.log('getVideosForSkill - Using exact match mapping for:', exactMatch);
     return {
       ...mapping,
       levelName: level,
@@ -716,8 +1467,11 @@ export function getVideosForSkill(skillName: string, level: string = "Beginner",
     key => key.toLowerCase() === normalizedSkill
   );
   
+  console.log('getVideosForSkill - Exact match no hyphen:', exactMatchNoHyphen);
+  
   if (exactMatchNoHyphen) {
     const mapping = SKILL_VIDEO_MAPPING[exactMatchNoHyphen];
+    console.log('getVideosForSkill - Using exact match no hyphen for:', exactMatchNoHyphen);
     return {
       ...mapping,
       levelName: level,
@@ -732,8 +1486,11 @@ export function getVideosForSkill(skillName: string, level: string = "Beginner",
            key.toLowerCase().replace(/\s+/g, '-').includes(normalizedSkill)
   );
   
+  console.log('getVideosForSkill - Partial match:', partialMatch);
+  
   if (partialMatch) {
     const mapping = SKILL_VIDEO_MAPPING[partialMatch];
+    console.log('getVideosForSkill - Using partial match for:', partialMatch);
     return {
       ...mapping,
       levelName: level,
@@ -743,6 +1500,7 @@ export function getVideosForSkill(skillName: string, level: string = "Beginner",
   }
   
   // Generic fallback with skill name in title - using communication skill videos (NOT Python)
+  console.log('getVideosForSkill - Using fallback for:', skillName);
   return {
     skillName: skillName,
     levelName: level,
